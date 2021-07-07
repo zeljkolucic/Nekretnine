@@ -1,0 +1,77 @@
+<table>
+    <tr>
+        <td colspan='2'>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Naziv</mat-label>
+                <input matInput type='text' [(ngModel)]='naziv'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Adresa</mat-label>
+                <input matInput type='text' [(ngModel)]='adresa'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-radio-group class='matFormField' [(ngModel)]='tipNekretnine'>
+                <mat-radio-button labelPosition='before' value='kuca'>Kuca</mat-radio-button>
+                <mat-radio-button labelPosition='before' value='stan'>Stan</mat-radio-button>
+            </mat-radio-group>
+        </td>
+    </tr>
+    <tr>
+        <mat-form-field class='matFormField' appearance='outline'>
+            <mat-label>Sprat</mat-label>
+            <input matInput type='text' [(ngModel)]='sprat'>
+        </mat-form-field>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Kvadratura</mat-label>
+                <input matInput type='number' [(ngModel)]='povrsina'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Broj soba</mat-label>
+                <input matInput type='text' [(ngModel)]='brojSoba'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-checkbox class='matFormField' labelPosition='before' [(ngModel)]='namestena'>
+                Namestena
+            </mat-checkbox>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-radio-group class='matFormField' [(ngModel)]='tipOglasa'>
+                <mat-radio-button labelPosition='before' value='izdavanje'>Izdavanje</mat-radio-button>
+                <mat-radio-button labelPosition='before' value='prodaja'>Prodaja</mat-radio-button>
+            </mat-radio-group>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Cena</mat-label>
+                <input matInput type='number' [(ngModel)]='cena'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button mat-button class='matFormField' (click)='dodajNekretninu()'>Dodaj</button>
+        </td>
+    </tr>
+</table>
+<div id='snackbar'>{{poruka}}</div>

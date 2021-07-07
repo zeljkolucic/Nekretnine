@@ -1,0 +1,13 @@
+<mat-sidenav-container>
+    <mat-sidenav mode='side' opened>
+        <button mat-button (click)='prikaziZahteveZaRegistraciju()'>Zahtevi za registracijom</button>
+        <button mat-button (click)='prikaziKorisnikeSistema()'>Korisnici sistema</button>
+        <button mat-button (click)='prikaziNekretnine()'>Nekretnine</button>
+        <button mat-button (click)='prikaziDodavanjeNovogKorisnika()'>Dodavanje novog korisnika</button>
+        <button mat-button (click)='prikaziDodavanjeNekretnine()'>Dodavanje nove nekretnine</button>
+        <button mat-button (click)='odjaviSe()'>Odjavi se</button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,29 @@
+<table *ngIf='korisnici != null && korisnici.length != 0; else nemaKorisnika'>
+    <tr>
+        <th>Slika profila</th>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Korisnicko ime</th>
+        <th>Lozinka</th>
+        <th>Email</th>
+        <th>Grad i drzava stanovanja</th>
+    </tr>
+    <tr *ngFor='let korisnik of korisnici'>
+        <td>
+            <img src={{korisnik.slika}} height='100px' width='100px'>
+        </td>
+        <td>{{korisnik.ime}}</td>
+        <td>{{korisnik.prezime}}</td>
+        <td>{{korisnik.korisnickoIme}}</td>
+        <td>{{korisnik.lozinka}}</td>
+        <td>{{korisnik.adresa}}</td>
+        <td>{{korisnik.gradDrzava}}</td>
+        <td>
+            <button mat-button (click)='azuriraj(korisnik)'>Azuriraj</button>
+        </td>
+        <td>
+            <button mat-button (click)='obrisi(korisnik)'>Obrisi</button>
+        </td>
+    </tr>
+</table>
+<ng-template #nemaKorisnika>Nema korisnika.</ng-template>

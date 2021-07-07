@@ -1,0 +1,16 @@
+<div *ngIf='nekretnine != null && nekretnine.length != 0; else nemaNekretnina'>
+    <div *ngFor='let nekretnina of nekretnine'>
+        <mat-card>
+            <mat-card-title>{{nekretnina.naziv}}</mat-card-title>    
+            <mat-card-content>
+                <img src = '../../assets/nekretnine/kuca_1_1.jpg' height='250px' width='720px'>
+            </mat-card-content>
+            <mat-card-content>{{nekretnina.adresa}}</mat-card-content>
+            <mat-card-content>{{nekretnina.brojSoba}}</mat-card-content>
+            <mat-card-actions align='end'>
+                <button mat-button (click)='odobri(nekretnina)'>Odobri</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+<ng-template #nemaNekretnina>Nema nekretnina.</ng-template>

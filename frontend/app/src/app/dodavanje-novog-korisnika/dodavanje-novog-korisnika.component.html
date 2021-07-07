@@ -1,0 +1,77 @@
+<table>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Ime</mat-label>
+                <input matInput type='text' [(ngModel)]='ime'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Prezime</mat-label>
+                <input matInput type='text' [(ngModel)]='prezime'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Korisnicko ime</mat-label>
+                <input matInput type='text' [(ngModel)]='korisnickoIme'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Lozinka</mat-label>
+                <input matInput type='text' [(ngModel)]='lozinka'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Potvrda lozinke</mat-label>
+                <input matInput type='text' [(ngModel)]='potvrdaLozinke'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Email</mat-label>
+                <input matInput type='text' [(ngModel)]='adresa'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Grad i drzava stanovanja</mat-label>
+                <input matInput type='text' [(ngModel)]='gradDrzava'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Tip korisnika</mat-label>
+                <mat-select [(ngModel)]='tip'>
+                    <mat-option value='registrovani korisnik'>registrovani korisnik</mat-option>
+                    <mat-option value='radnik agencije'>radnik agencije</mat-option>
+                    <mat-option value='administrator'>administrator</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button mat-button class='matFormField' (click)='registracija()'>Dodaj korisnika</button>
+        </td>
+    </tr>
+</table>
+{{poruka}}
+

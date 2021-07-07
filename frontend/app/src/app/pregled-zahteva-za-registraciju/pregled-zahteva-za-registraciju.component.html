@@ -1,0 +1,31 @@
+<table *ngIf='zahtevi != null && zahtevi.length != 0; else nemaZahteva'>
+    <tr>
+        <th>Slika profila</th>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Korisnicko ime</th>
+        <th>Lozinka</th>
+        <th>Email</th>
+        <th>Grad i drzava stanovanja</th>
+    </tr>
+    <tr *ngFor='let zahtev of zahtevi'>
+        <td>
+            <img src={{korisnik.slika}} height='100px' width='100px'>
+        </td>
+        <td>{{zahtev.ime}}</td>
+        <td>{{zahtev.prezime}}</td>
+        <td>{{zahtev.korisnickoIme}}</td>
+        <td>{{zahtev.lozinka}}</td>
+        <td>{{zahtev.adresa}}</td>
+        <td>{{zahtev.gradDrzava}}</td>
+        <td>
+            <button (click)='prihvati(zahtev)'>Prihvati</button>
+        </td>
+        <td>
+            <button (click)='odbij(zahtev)'>Odbij</button>
+        </td>
+    </tr>
+</table>
+<ng-template #nemaZahteva>
+    Nema zahteva za registracijom.
+</ng-template>

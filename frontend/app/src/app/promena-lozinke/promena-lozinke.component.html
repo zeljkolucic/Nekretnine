@@ -1,0 +1,26 @@
+<table>
+    <tr>
+        <td>Stara lozinka:</td>
+        <td>
+            <input type='text' [(ngModel)]='staraLozinka'>
+        </td>
+    </tr>
+    <tr>
+        <td>Nova lozinka:</td>
+        <td>
+            <input type='text' [(ngModel)]='novaLozinka'>
+        </td>
+    </tr>
+    <tr>
+        <td>Potvrda lozinka:</td>
+        <td>
+            <input type='text' [(ngModel)]='potvrdaLozinke'>
+        </td>
+    </tr>
+    <tr>
+        <td colspan='2'>
+            <button (click)='potvrdi()'>Potvrdi</button>
+        </td>
+    </tr>
+</table>
+{{poruka}}

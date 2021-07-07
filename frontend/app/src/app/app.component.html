@@ -1,0 +1,10 @@
+<mat-toolbar class='navbar'>
+  <div id='title'>Nekretnine</div>
+  <div *ngIf='!ulogovan()'>
+    <a mat-button routerLink='prijava' routerLinkActive='button-selected'>Prijava</a>
+    <a mat-button routerLink='registracija' routerLinkActive='button-selected'>Registracija</a>
+  </div>
+</mat-toolbar>
+<div class='content'>
+  <router-outlet></router-outlet>
+</div>
