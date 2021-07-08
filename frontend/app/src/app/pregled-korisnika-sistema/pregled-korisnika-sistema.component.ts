@@ -17,6 +17,7 @@ export class PregledKorisnikaSistemaComponent implements OnInit {
   }
 
   korisnici: Korisnik[];
+  kolone: string[] = ['slika', 'ime', 'prezime', 'korisnickoIme', 'lozinka', 'adresa', 'gradDrzava', 'azuriraj', 'obrisi'];
 
   dohvatiSveKorisnike() {
     this.korisnikService.dohvatiSveKorisnike().subscribe((korisnici: Korisnik[]) => {
@@ -26,12 +27,12 @@ export class PregledKorisnikaSistemaComponent implements OnInit {
 
   azuriraj(korisnik: Korisnik) {
     localStorage.setItem('korisnikZaAzuriranje', JSON.stringify(korisnik));
-    this.router.navigate(['azuriranjeKorisnika'], {relativeTo: this.route});
+    this.router.navigate(['administrator/azuriranjeKorisnika']);
   }
 
   obrisi(korisnik: Korisnik) {
     this.korisnikService.ukloniKorisnika(korisnik.korisnickoIme).subscribe();
-    location.reload();
+    this.dohvatiSveKorisnike();
   }
 
 }

@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
+import { asLiteral } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { KorisnikService } from '../korisnik.service';
 import { Korisnik } from '../models/korisnik';
 import { ZahtevService } from '../zahtev.service';
@@ -10,7 +13,7 @@ import { ZahtevService } from '../zahtev.service';
 })
 export class RegistracijaComponent implements OnInit {
 
-  constructor(private korisnikService: KorisnikService, private zahtevService: ZahtevService) { }
+  constructor(private http: HttpClient, private korisnikService: KorisnikService, private zahtevService: ZahtevService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -22,49 +25,38 @@ export class RegistracijaComponent implements OnInit {
   lozinka: string;
   potvrdaLozinke: string;
   slika: string;
+  fajlSlika;
   adresa: string;
   gradDrzava: string;
 
-  poruka: string;
-
   registracija() {
     if(!this.ime || !this.prezime || !this.korisnickoIme || !this.lozinka || !this.potvrdaLozinke || !this.adresa || !this.gradDrzava) {
-      this.poruka = 'Unesite sve podatke!';
-      let toast = document.getElementById('snackbar');
-      toast.className = 'showRed';
-      setTimeout(function(){toast.className = toast.className.replace('showRed', ''); }, 3000);
+      this.otvoriSnackBar('Unesite preostala polja!');
     } else {
       this.korisnikService.dohvatiKorisnika(this.korisnickoIme).subscribe((korisnik: Korisnik) => {
         if(korisnik) {
-          this.poruka = 'Korisnicko ime je zauzeto!';
-          let toast = document.getElementById('snackbar');
-          toast.className = 'showRed';
-          setTimeout(function(){toast.className = toast.className.replace('showRed', ''); }, 3000);
+          this.otvoriSnackBar('Korisnicko ime je zauzeto!');
         } else {
           let regexLozinka = /^(?!.*([A-Za-z0-9!@#$%^&*()_+{}[\]|\\\/?.,><:"';])\1{3})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}[\]|\\\/?.,><:"';])[A-Za-z\d!@#$%^&*()_+{}[\]|\\\/?.,><:"';]{8,24}$/;
           let regexEmail = /^\w{4,}@\w+\.\w{2,3}$/;
           if(!regexLozinka.test(this.lozinka)) {
-            this.poruka = 'Lozinka nije dovoljno jaka!';
-            let toast = document.getElementById('snackbar');
-            toast.className = 'showRed';
-            setTimeout(function(){toast.className = toast.className.replace('showRed', ''); }, 3000);
+            this.otvoriSnackBar('Lozinka nije dovoljno jaka!');
           } else if(this.lozinka != this.potvrdaLozinke) {
-            this.poruka = 'Lozinke se ne podudaraju!';
-            let toast = document.getElementById('snackbar');
-            toast.className = 'showRed';
-            setTimeout(function(){toast.className = toast.className.replace('showRed', ''); }, 3000);
+            this.otvoriSnackBar('Lozinke se ne podudaraju!');
           } else if(!regexEmail.test(this.adresa)) {
-            this.poruka = 'Email nije u odgovarajucem formatu!';
-            let toast = document.getElementById('snackbar');
-            toast.className = 'showRed';
-            setTimeout(function(){toast.className = toast.className.replace('showRed', ''); }, 3000);
+            this.otvoriSnackBar('Email nije u odgovarajucem formatu!');
           } else {
             if(!this.slika) 
               this.slika = 'podrazumevano.png'; 
-            this.poruka = 'Zahtev za registracijom uspesno poslat!'; 
-            let toast = document.getElementById('snackbar');
-            toast.className = 'showRed';
-            setTimeout(function(){toast.className = toast.className.replace('showGreen', ''); }, 3000);
+            this.slika = '../assets/' + this.slika;
+            this.otvoriSnackBar('Zahtev za registracijom uspesno poslat!');
+            const formData = new FormData();
+            formData.append('file', this.fajlSlika);
+
+            this.http.post<any>('http://localhost:4000/file', formData).subscribe(
+              (res) => this.slika = res,
+              (err) => console.log(err)
+            );
             this.zahtevService.dodajZahtev(this.ime, this.prezime, this.korisnickoIme, this.lozinka, this.slika, this.adresa, this.gradDrzava).subscribe((err) => {
               if(err) console.log(err);
             })
@@ -74,10 +66,15 @@ export class RegistracijaComponent implements OnInit {
     }
   }
 
-  dodajSlike() {
-    
+  odaberiSlike(event) {
+    if(event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.fajlSlika = file;
+    }
   }
 
-
+  otvoriSnackBar(poruka) {
+    this.snackBar.open(poruka, '', {duration: 3000});
+  }
 
 }

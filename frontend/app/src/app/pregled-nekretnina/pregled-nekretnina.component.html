@@ -1,14 +1,35 @@
+<div *ngIf="tipKorisnika() == 'gost'">
+    <mat-form-field class='matFormField' appearance='outline'>
+        <mat-label>Grad</mat-label>
+        <input matInput type='text' [(ngModel)]='grad'>
+    </mat-form-field>
+    <mat-form-field class='matFormField' appearance='outline'>
+        <mat-label>Cena od</mat-label>
+        <input matInput type='number' [(ngModel)]='cenaOd'>
+    </mat-form-field>
+    <mat-form-field class='matFormField' appearance='outline'>
+        <mat-label>Cena do</mat-label>
+        <input matInput type='number' [(ngModel)]='cenaDo'>
+    </mat-form-field>
+    <button class='matFormField' mat-raised-button color='primary' (click)='pretrazi()'>Pretrazi</button>
+</div>
 <div *ngIf='nekretnine != null && nekretnine.length != 0; else nemaNekretnina'>
     <div *ngFor='let nekretnina of nekretnine'>
-        <mat-card>
+        <mat-card class='matCard'>
             <mat-card-title>{{nekretnina.naziv}}</mat-card-title>    
             <mat-card-content>
-                <img src = '../../assets/nekretnine/kuca_1_1.jpg' height='250px' width='720px'>
+                <img [src]='slucajnaSlika(nekretnina)' height='490px' width='734px'>
             </mat-card-content>
-            <mat-card-content>{{nekretnina.adresa}}</mat-card-content>
-            <mat-card-content>{{nekretnina.brojSoba}}</mat-card-content>
+            <mat-card-content>{{nekretnina.grad}}, {{nekretnina.opstina}}</mat-card-content>
+            <mat-card-content>Cena: {{nekretnina.cena}}</mat-card-content>
+            <mat-card-content *ngIf="nekretnina.tipNekretnine == 'kuca'">Kuca</mat-card-content>
+            <mat-card-content *ngIf="nekretnina.tipNekretnine == 'stan'">{{nekretnina.brojSoba}} stan</mat-card-content>
+            <mat-card-content>Kvadratura: {{nekretnina.povrsina}}</mat-card-content>
+            <mat-card-content>{{nekretnina.tipOglasa}}</mat-card-content>
             <mat-card-actions align='end'>
-                <button mat-button (click)='odobri(nekretnina)'>Odobri</button>
+                <button mat-raised-button color='primary' *ngIf="tipKorisnika() == 'radnik agencije' && !nekretnina.promovisana" (click)='promovisi(nekretnina)'>Promovisi</button>
+                <button mat-raised-button color='primary'*ngIf="tipKorisnika() == 'radnik agencije' && nekretnina.promovisana" (click)='ukloniIzPromovisanih(nekretnina)'>Ukloni iz promovisanih</button>
+                <button mat-raised-button color='primary' *ngIf="(tipKorisnika() == 'administrator' || tipKorisnika() == 'radnik agencije') && nekretnina.odobrena == false" (click)='odobri(nekretnina)'>Odobri</button>
             </mat-card-actions>
         </mat-card>
     </div>

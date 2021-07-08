@@ -17,6 +17,7 @@ export class PregledZahtevaZaRegistracijuComponent implements OnInit {
   }
 
   zahtevi: Zahtev[];
+  kolone: string[] = ['slika', 'ime', 'prezime', 'korisnickoIme', 'lozinka', 'adresa', 'gradDrzava', 'prihvati', 'odbij'];
 
   dohvatiSveZahteve() {
     this.zahtevService.dohvatiZahteve().subscribe((zahtevi: Zahtev[]) => {
@@ -27,12 +28,12 @@ export class PregledZahtevaZaRegistracijuComponent implements OnInit {
   prihvati(zahtev: Zahtev) {
     this.korisnikService.dodajKorisnika(zahtev.ime, zahtev.prezime, zahtev.korisnickoIme, zahtev.lozinka, zahtev.slika, zahtev.adresa, zahtev.gradDrzava, '').subscribe();
     this.zahtevService.ukloniZahtev(zahtev).subscribe();
-    location.reload();
+    this.dohvatiSveZahteve();
   }
 
   odbij(zahtev: Zahtev) {
     this.zahtevService.ukloniZahtev(zahtev).subscribe();
-    location.reload();
+    this.dohvatiSveZahteve();
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Korisnik } from './models/korisnik';
+import { Observable } from 'rxjs';
+import { KorisnikService } from './korisnik.service';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +10,16 @@ import { Korisnik } from './models/korisnik';
 export class AppComponent {
   title = 'app';
 
-  constructor(private router: Router) {}
+  constructor(private korisnikService: KorisnikService) {}
 
   ngOnInit(): void {
-    this.korisnik = JSON.parse(localStorage.getItem('ulogovan'));
+    this.loginStatus$ = this.korisnikService.jeUlogovan;
+    this.korisnickoIme$ = this.korisnikService.trenutnoKorisnickoIme;
+    this.tipKorisnika$ = this.korisnikService.trenutniTipKorisnika;
   }
 
-  korisnik: Korisnik;
-
-  ulogovan(): boolean {
-    return this.korisnik != null;
-  }
+  loginStatus$ : Observable<boolean>;
+  korisnickoIme$ : Observable<string>;
+  tipKorisnika$: Observable<string>;
 
 }

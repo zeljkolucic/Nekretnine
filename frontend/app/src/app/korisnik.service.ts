@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
-import { Zahtev } from './models/zahtev';
+import { BehaviorSubject } from 'rxjs';
+import { Korisnik } from './models/korisnik';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,49 @@ export class KorisnikService {
 
   constructor(private http: HttpClient) { }
 
+  private loginStatus = new BehaviorSubject<boolean>(this.proveriLoginStatus());
+  private korisnickoIme = new BehaviorSubject<string>(this.dohvatiKorisnickoIme());
+  private tipKorisnika = new BehaviorSubject<string>(this.dohvatiTipKorisnika());
+
   uri = 'http://localhost:4000';
+
+  postaviLoginStatus(vrednost: boolean) {
+    this.loginStatus.next(vrednost);
+  }
+
+  proveriLoginStatus(): boolean {
+    return false;
+  }
+
+  dohvatiKorisnickoIme(): string {
+    let korisnik: Korisnik = JSON.parse(localStorage.getItem('ulogovan'));
+    if(korisnik) {
+      return korisnik.korisnickoIme;
+    } else {
+      return null;
+    }
+  }
+
+  dohvatiTipKorisnika(): string {
+    let korisnik: Korisnik = JSON.parse(localStorage.getItem('ulogovan'));
+    if(korisnik) {
+      return korisnik.tip;
+    } else {
+      return null;
+    }
+  }
+
+  get jeUlogovan() {
+    return this.loginStatus.asObservable();
+  }
+
+  get trenutnoKorisnickoIme() {
+    return this.korisnickoIme.asObservable();
+  }
+
+  get trenutniTipKorisnika() {
+    return this.tipKorisnika.asObservable();
+  }
 
   prijava(korisnickoIme, lozinka, tip) {
     const podaci = {

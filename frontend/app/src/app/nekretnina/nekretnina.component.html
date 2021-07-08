@@ -1,1 +1,17 @@
-<p>nekretnina works!</p>
+<div>
+    <mat-card class='matCard'>
+        <mat-card-title>{{nekretnina.naziv}}</mat-card-title>    
+        <mat-card-content>
+            <img src={{nekretnina.galerija[0]}} height='490px' width='734px'>
+        </mat-card-content>
+        <mat-card-content>{{nekretnina.adresa}}, {{nekretnina.opstina}}, {{nekretnina.grad}}</mat-card-content>
+        <mat-card-content>Cena: {{nekretnina.cena}}</mat-card-content>
+        <mat-card-content *ngIf="nekretnina.tipNekretnine == 'kuca'">Kuca</mat-card-content>
+        <mat-card-content *ngIf="nekretnina.tipNekretnine == 'stan'">{{nekretnina.brojSoba}} stan</mat-card-content>
+        <mat-card-content>Kvadratura: {{nekretnina.povrsina}}</mat-card-content>
+        <mat-card-content>{{nekretnina.tipOglasa}}</mat-card-content>
+        <mat-card-actions align='end'>
+            <button mat-raised-button color='primary'>Promovisi</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

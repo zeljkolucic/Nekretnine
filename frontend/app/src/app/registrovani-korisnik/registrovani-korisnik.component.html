@@ -1,2 +1,10 @@
-<button (click)='odjaviSe()'>Odjavi se</button>
-<a routerLink='../promenaLozinke'>Promena lozinke</a>
+<mat-sidenav-container>
+    <mat-sidenav mode='side' opened>
+        <a mat-button routerLink='promenaLozinke'>Promena lozinke</a>
+        <a mat-button routerLink='dodavanjeNekretnine'>Dodavanje nove nekretnine</a>
+        <button mat-button (click)='odjaviSe()'>Odjavi se</button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

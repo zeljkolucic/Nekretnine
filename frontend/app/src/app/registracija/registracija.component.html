@@ -1,57 +1,56 @@
-<table>
+<table class='registracija'>
     <tr>
-        <td>Ime:</td>
         <td>
-            <input type='text' [(ngModel)]='ime'>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Ime</mat-label>
+                <input matInput type='text' [(ngModel)]='ime'>
+            </mat-form-field>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Prezime</mat-label>
+                <input matInput type='text' [(ngModel)]='prezime'>
+            </mat-form-field>
         </td>
     </tr>
     <tr>
-        <td>Prezime:</td>
         <td>
-            <input type='text' [(ngModel)]='prezime'>
+            <mat-form-field class='matFormField2' appearance='outline'>
+                <mat-label>Korisnicko ime</mat-label>
+                <input matInput type='text' [(ngModel)]='korisnickoIme'>
+            </mat-form-field>
         </td>
     </tr>
     <tr>
-        <td>Korisnicko ime:</td>
         <td>
-            <input type='text' [(ngModel)]='korisnickoIme'>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Lozinka</mat-label>
+                <input matInput type='text' [(ngModel)]='lozinka'>
+            </mat-form-field><mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Potvrda lozinke</mat-label>
+                <input matInput type='text' [(ngModel)]='potvrdaLozinke'>
+            </mat-form-field>
         </td>
     </tr>
     <tr>
-        <td>Lozinka:</td>
         <td>
-            <input type='text' [(ngModel)]='lozinka'>
+            <mat-form-field class='matFormField2' appearance='outline'>
+                <mat-label>Adresa</mat-label>
+                <input matInput type='text' [(ngModel)]='adresa'>
+            </mat-form-field>
         </td>
     </tr>
     <tr>
-        <td>Potvrda lozinke:</td>
         <td>
-            <input type='text' [(ngModel)]='potvrdaLozinke'>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Grad i drzava stanovanja</mat-label>
+                <input matInput type='text' [(ngModel)]='gradDrzava'>
+            </mat-form-field>
+            <input type='file' name='slike' (change)='odaberiSlike($event)'>
         </td>
     </tr>
     <tr>
-        <td>Email:</td>
         <td>
-            <input type='text' [(ngModel)]='adresa'>
-        </td>
-    </tr>
-    <tr>
-        <td>Grad i drzava stanovanja:</td>
-        <td>
-            <input type='text' [(ngModel)]='gradDrzava'>
-        </td>
-    </tr>
-    <tr>
-        <td>Profilna slika:</td>
-        <td>
-            <button (click)='dodajSlike()'>Dodaj</button>
-        </td>
-    </tr>
-    <tr>
-        <td colspan='2'>
-            <button (click)='registracija()'>Registracija</button>
+            <button mat-raised-button color='primary' class='matFormField2' (click)='registracija()'>Registracija</button>
         </td>
     </tr>
 </table>
-<div id='snackbar'>{{poruka}}</div>
 

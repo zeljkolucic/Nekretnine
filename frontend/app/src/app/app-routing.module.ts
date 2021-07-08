@@ -14,20 +14,39 @@ import { PregledKorisnikaSistemaComponent } from './pregled-korisnika-sistema/pr
 import { PregledNekretninaComponent } from './pregled-nekretnina/pregled-nekretnina.component';
 
 const routes: Routes = [
-  {path: '', component: PrijavaComponent},
+  {path: '', component: PregledNekretninaComponent},
   {path: 'prijava', component: PrijavaComponent},
   {path: 'registracija', component: RegistracijaComponent},
-  {path: 'registrovaniKorisnik', component: RegistrovaniKorisnikComponent},
-  {path: 'radnikAgencije', component: RadnikAgencijeComponent},
+  {path: 'pregledNekretnina', component: PregledNekretninaComponent},
+  {
+    path: 'registrovaniKorisnik', 
+    component: RegistrovaniKorisnikComponent,
+    children: [
+      {path: 'promenaLozinke', component: PromenaLozinkeComponent},
+      {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
+    ]
+  },
+  {
+    path: 'radnikAgencije', 
+    component: RadnikAgencijeComponent,
+    children: [
+      {path: '', component: PregledNekretninaComponent},
+      {path: 'pregledNekretnina', component: PregledNekretninaComponent},
+      {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent}
+    ]
+  },
   {
     path: 'administrator', 
     component: AdministratorComponent,
     children: [
+      {path: '', component: PregledNekretninaComponent},
       {path: 'pregledZahtevaZaRegistraciju', component: PregledZahtevaZaRegistracijuComponent},
       {path: 'pregledKorisnikaSistema', component: PregledKorisnikaSistemaComponent},
       {path: 'pregledNekretnina', component: PregledNekretninaComponent},
       {path: 'dodavanjeNovogKorisnika', component: DodavanjeNovogKorisnikaComponent},
-      {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent}
+      {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
+      {path: 'promenaLozinke', component: PromenaLozinkeComponent},
+      {path: 'azuriranjeKorisnika', component: AzuriranjeKorisnikaComponent}
     ]
   },
   {path: 'azuriranjeKorisnika', component: AzuriranjeKorisnikaComponent},   

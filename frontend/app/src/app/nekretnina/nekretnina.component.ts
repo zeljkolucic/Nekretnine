@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Nekretnina } from '../models/nekretnina';
 
 @Component({
   selector: 'app-nekretnina',
@@ -9,7 +10,10 @@ export class NekretninaComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.nekretnina = JSON.parse(localStorage.getItem('nekretnina'));
   }
+
+  nekretnina: Nekretnina;
 
 }

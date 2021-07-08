@@ -1,8 +1,9 @@
-<mat-toolbar class='navbar'>
+<mat-toolbar class='navbar' color='primary'>
   <div id='title'>Nekretnine</div>
-  <div *ngIf='!ulogovan()'>
-    <a mat-button routerLink='prijava' routerLinkActive='button-selected'>Prijava</a>
-    <a mat-button routerLink='registracija' routerLinkActive='button-selected'>Registracija</a>
+  <div *ngIf='!(loginStatus$ | async) as loginStatus'>
+    <a mat-button *ngIf='loginStatus' routerLink='pregledNekretnina'>Nekretnine</a>
+    <a mat-button *ngIf='loginStatus' routerLink='prijava'>Prijava</a>
+    <a mat-button *ngIf='loginStatus' routerLink='registracija'>Registracija</a>
   </div>
 </mat-toolbar>
 <div class='content'>

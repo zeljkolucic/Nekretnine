@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { KorisnikService } from '../korisnik.service';
 import { Korisnik } from '../models/korisnik';
@@ -10,7 +11,7 @@ import { Korisnik } from '../models/korisnik';
 })
 export class PromenaLozinkeComponent implements OnInit {
 
-  constructor(private router: Router, private korisnikService: KorisnikService) { }
+  constructor(private router: Router, private korisnikService: KorisnikService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.korisnik = JSON.parse(localStorage.getItem('ulogovan'));
@@ -24,21 +25,29 @@ export class PromenaLozinkeComponent implements OnInit {
   poruka: string;
 
   potvrdi() {
-    let regexLozinka = /^(?!.*([A-Za-z0-9!@#$%^&*()_+{}[\]|\\\/?.,><:"';])\1{3})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}[\]|\\\/?.,><:"';])[A-Za-z\d!@#$%^&*()_+{}[\]|\\\/?.,><:"';]{8,24}$/;
-    if(this.staraLozinka != this.korisnik.lozinka) {
-      this.poruka = 'Uneli ste pogresnu lozinku!';
-    } else if(this.staraLozinka == this.novaLozinka) {
-      this.poruka = 'Nova lozinka ne moze biti stara lozinka!';
-    } else if(!regexLozinka.test(this.novaLozinka)) {
-      this.poruka = 'Nova lozinka nije dovoljno jaka!';
-    } else if(this.novaLozinka != this.potvrdaLozinke) {
-      this.poruka = 'Lozinke se ne podudaraju!';
+    if(!this.staraLozinka || !this.novaLozinka || !this.potvrdaLozinke) {
+      this.prikaziSnackBar('Sva polja su obavezna!');
     } else {
-      this.korisnikService.promeniLozinku(this.korisnik.korisnickoIme, this.novaLozinka).subscribe();
-      this.poruka = '';
-      localStorage.removeItem('ulogovan');
-      this.router.navigate(['prijava']);
+      let regexLozinka = /^(?!.*([A-Za-z0-9!@#$%^&*()_+{}[\]|\\\/?.,><:"';])\1{3})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}[\]|\\\/?.,><:"';])[A-Za-z\d!@#$%^&*()_+{}[\]|\\\/?.,><:"';]{8,24}$/;
+      if(this.staraLozinka != this.korisnik.lozinka) {
+        this.prikaziSnackBar('Uneli ste pogresnu lozinku!');
+      } else if(this.staraLozinka == this.novaLozinka) {
+        this.prikaziSnackBar('Nova lozinka ne moze biti stara lozinka!');
+      } else if(!regexLozinka.test(this.novaLozinka)) {
+        this.prikaziSnackBar('Nova lozinka nije dovoljno jaka!');
+      } else if(this.novaLozinka != this.potvrdaLozinke) {
+        this.prikaziSnackBar('Lozinke se ne podudaraju!');
+      } else {
+        this.korisnikService.promeniLozinku(this.korisnik.korisnickoIme, this.novaLozinka).subscribe();
+        this.poruka = '';
+        localStorage.removeItem('ulogovan');
+        this.router.navigate(['prijava']);
+      }
     }
+  }
+
+  prikaziSnackBar(poruka: string) {
+    this.snackBar.open(poruka, '', {duration: 3000});
   }
 
 }

@@ -10,6 +10,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const korisnik_routes_1 = __importDefault(require("./routes/korisnik.routes"));
 const zahtev_routes_1 = __importDefault(require("./routes/zahtev.routes"));
 const nekretnina_routes_1 = __importDefault(require("./routes/nekretnina.routes"));
+const multer_1 = __importDefault(require("multer"));
 const app = express_1.default();
 app.use(cors_1.default());
 app.use(body_parser_1.default.json());
@@ -22,6 +23,32 @@ const router = express_1.default.Router();
 router.use('/korisnik', korisnik_routes_1.default);
 router.use('/zahtev', zahtev_routes_1.default);
 router.use('/nekretnina', nekretnina_routes_1.default);
+const storage = multer_1.default.diskStorage({
+    destination: (req, file, callBack) => {
+        callBack(null, '../frontend/app/src/assets');
+    },
+    filename: (req, file, callBack) => {
+        callBack(null, `${file.originalname}`);
+    }
+});
+let upload = multer_1.default({ storage: storage });
+app.post('/file', upload.single('file'), (req, res, next) => {
+    const file = req.file;
+    if (!file) {
+        const error = new Error('Dodajte fajl!');
+        return next(error);
+    }
+    console.log(file.filename);
+    res.send(file.filename);
+});
+app.post('/files', upload.array('files'), (req, res, next) => {
+    const files = req.files;
+    if (!files) {
+        const error = new Error('Dodajte fajl!');
+        return next(error);
+    }
+    res.send(files);
+});
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));
 //# sourceMappingURL=server.js.map

@@ -1,6 +1,6 @@
 <table>
     <tr>
-        <td colspan='2'>
+        <td colspan='3'>
             <mat-form-field class='matFormField' appearance='outline'>
                 <mat-label>Naziv</mat-label>
                 <input matInput type='text' [(ngModel)]='naziv'>
@@ -14,9 +14,21 @@
                 <input matInput type='text' [(ngModel)]='adresa'>
             </mat-form-field>
         </td>
+        <td>
+            <mat-form-field appearance='outline'>
+                <mat-label>Opstina</mat-label>
+                <input matInput type='text' [(ngModel)]='opstina'>
+            </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field appearance='outline'>
+                <mat-label>Grad</mat-label>
+                <input matInput type='text' [(ngModel)]='grad'>
+            </mat-form-field>
+        </td>
     </tr>
     <tr>
-        <td>
+        <td colspan='3'>
             <mat-radio-group class='matFormField' [(ngModel)]='tipNekretnine'>
                 <mat-radio-button labelPosition='before' value='kuca'>Kuca</mat-radio-button>
                 <mat-radio-button labelPosition='before' value='stan'>Stan</mat-radio-button>
@@ -24,13 +36,23 @@
         </td>
     </tr>
     <tr>
-        <mat-form-field class='matFormField' appearance='outline'>
-            <mat-label>Sprat</mat-label>
-            <input matInput type='text' [(ngModel)]='sprat'>
-        </mat-form-field>
+        <td colspan='3'>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Broj spratova</mat-label>
+                <input matInput type='text' [(ngModel)]='brojSpratova'>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr *ngIf="tipNekretnine == 'stan'">
+        <td colspan='3'>
+            <mat-form-field appearance='outline'>
+                <mat-label>Sprat</mat-label>
+                <input matInput type='text' [(ngModel)]='sprat'>
+            </mat-form-field>
+        </td>
     </tr>
     <tr>
-        <td>
+        <td colspan='3'>
             <mat-form-field class='matFormField' appearance='outline'>
                 <mat-label>Kvadratura</mat-label>
                 <input matInput type='number' [(ngModel)]='povrsina'>
@@ -38,7 +60,7 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td colspan='3'>
             <mat-form-field class='matFormField' appearance='outline'>
                 <mat-label>Broj soba</mat-label>
                 <input matInput type='text' [(ngModel)]='brojSoba'>
@@ -46,22 +68,22 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td colspan='3'>
             <mat-checkbox class='matFormField' labelPosition='before' [(ngModel)]='namestena'>
                 Namestena
             </mat-checkbox>
         </td>
     </tr>
     <tr>
-        <td>
+        <td colspan='3'>
             <mat-radio-group class='matFormField' [(ngModel)]='tipOglasa'>
-                <mat-radio-button labelPosition='before' value='izdavanje'>Izdavanje</mat-radio-button>
-                <mat-radio-button labelPosition='before' value='prodaja'>Prodaja</mat-radio-button>
+                <mat-radio-button labelPosition='before' value='Izdavanje'>Izdavanje</mat-radio-button>
+                <mat-radio-button labelPosition='before' value='Prodaja'>Prodaja</mat-radio-button>
             </mat-radio-group>
         </td>
     </tr>
     <tr>
-        <td>
+        <td colspan='3'>
             <mat-form-field class='matFormField' appearance='outline'>
                 <mat-label>Cena</mat-label>
                 <input matInput type='number' [(ngModel)]='cena'>
@@ -69,8 +91,13 @@
         </td>
     </tr>
     <tr>
-        <td>
-            <button mat-button class='matFormField' (click)='dodajNekretninu()'>Dodaj</button>
+        <td colspan='3'>
+            <input type='file' name='slike' multiple (change)='odaberiSlike($event)'>
+        </td>
+    </tr>
+    <tr>
+        <td colspan='3'>
+            <button mat-raised-button color='primary' class='matButton' (click)='dodajNekretninu()'>Dodaj</button>
         </td>
     </tr>
 </table>

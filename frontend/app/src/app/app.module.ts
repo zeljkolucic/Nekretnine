@@ -20,6 +20,7 @@ import { MaterialModule } from './material/material.module';
 import { PregledZahtevaZaRegistracijuComponent } from './pregled-zahteva-za-registraciju/pregled-zahteva-za-registraciju.component';
 import { PregledKorisnikaSistemaComponent } from './pregled-korisnika-sistema/pregled-korisnika-sistema.component';
 import { PregledNekretninaComponent } from './pregled-nekretnina/pregled-nekretnina.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { PregledNekretninaComponent } from './pregled-nekretnina/pregled-nekretn
     DodavanjeNekretnineComponent,
     PregledZahtevaZaRegistracijuComponent,
     PregledKorisnikaSistemaComponent,
-    PregledNekretninaComponent
+    PregledNekretninaComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import { PregledNekretninaComponent } from './pregled-nekretnina/pregled-nekretn
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

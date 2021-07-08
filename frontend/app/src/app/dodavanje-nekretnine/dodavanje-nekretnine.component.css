@@ -6,3 +6,8 @@ mat-radio-button {
 .matFormField {
     width: 400px;
 }
+
+.matButton {
+    margin-top: 2rem;
+    width: 400px;
+}

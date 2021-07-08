@@ -10,6 +10,12 @@ let Nekretnina = new Schema(
         naziv: {
             type: String
         },
+        grad: {
+            type: String
+        },
+        opstina: {
+            type: String
+        },
         adresa: {
             type: String
         },
@@ -19,8 +25,17 @@ let Nekretnina = new Schema(
         povrsina: {
             type: Number
         },
+        brojSpratova: {
+            type: Number,
+            required: false
+        },
+        sprat: {
+            type: Number,
+            required: false
+        },
         brojSoba: {
-            type: String
+            type: String,
+            required: false
         },
         namestena: {
             type: Boolean
@@ -36,6 +51,9 @@ let Nekretnina = new Schema(
         },
         vlasnik: {
             type: String
+        },
+        promovisana: {
+            type: Boolean
         },
         odobrena: {
             type: Boolean

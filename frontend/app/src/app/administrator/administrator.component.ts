@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KorisnikService } from '../korisnik.service';
 import { NekretninaService } from '../nekretnina.service';
@@ -17,28 +17,15 @@ export class AdministratorComponent implements OnInit {
 
   poruka: string;
 
-  prikaziZahteveZaRegistraciju() {
-    this.router.navigate(['pregledZahtevaZaRegistraciju'], {relativeTo: this.route});
-  }
-
-  prikaziKorisnikeSistema() {
-    this.router.navigate(['pregledKorisnikaSistema'], {relativeTo: this.route});
-  }
-
-  prikaziNekretnine() {
-    this.router.navigate(['pregledNekretnina'], {relativeTo: this.route});
-  }
-
-  prikaziDodavanjeNovogKorisnika() {
-    this.router.navigate(['dodavanjeNovogKorisnika'], {relativeTo: this.route});
-  }
-
-  prikaziDodavanjeNekretnine() {
-    this.router.navigate(['dodavanjeNekretnine'], {relativeTo: this.route});
-  }
-
   odjaviSe() {
     localStorage.removeItem('ulogovan');
+    this.korisnikService.postaviLoginStatus(false);
     this.router.navigate(['prijava']);
   }
+
+  ngOnDestroy(): void {
+    localStorage.removeItem('ulogovan');
+    this.korisnikService.postaviLoginStatus(false);
+  }
+
 }

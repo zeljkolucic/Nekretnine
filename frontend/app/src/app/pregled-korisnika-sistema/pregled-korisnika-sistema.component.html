@@ -1,29 +1,61 @@
-<table *ngIf='korisnici != null && korisnici.length != 0; else nemaKorisnika'>
-    <tr>
-        <th>Slika profila</th>
-        <th>Ime</th>
-        <th>Prezime</th>
-        <th>Korisnicko ime</th>
-        <th>Lozinka</th>
-        <th>Email</th>
-        <th>Grad i drzava stanovanja</th>
-    </tr>
-    <tr *ngFor='let korisnik of korisnici'>
-        <td>
-            <img src={{korisnik.slika}} height='100px' width='100px'>
+<div *ngIf='korisnici != null && korisnici.length != 0; else nemaKorisnika'>
+    <table mat-table [dataSource]="korisnici" class="mat-elevation-z8">
+        <ng-container matColumnDef="slika">
+        <th mat-header-cell *matHeaderCellDef>Slika</th>
+        <td mat-cell *matCellDef="let korisnik">
+            <img src={{korisnik.slika}} height='50px' width='50px'>
         </td>
-        <td>{{korisnik.ime}}</td>
-        <td>{{korisnik.prezime}}</td>
-        <td>{{korisnik.korisnickoIme}}</td>
-        <td>{{korisnik.lozinka}}</td>
-        <td>{{korisnik.adresa}}</td>
-        <td>{{korisnik.gradDrzava}}</td>
-        <td>
-            <button mat-button (click)='azuriraj(korisnik)'>Azuriraj</button>
-        </td>
-        <td>
-            <button mat-button (click)='obrisi(korisnik)'>Obrisi</button>
-        </td>
-    </tr>
-</table>
-<ng-template #nemaKorisnika>Nema korisnika.</ng-template>
+        </ng-container>
+    
+        <ng-container matColumnDef="ime">
+        <th mat-header-cell *matHeaderCellDef>Ime</th>
+        <td mat-cell *matCellDef="let korisnik">{{korisnik.ime}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="prezime">
+        <th mat-header-cell *matHeaderCellDef>Prezime</th>
+        <td mat-cell *matCellDef="let korisnik"> {{korisnik.prezime}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="korisnickoIme">
+        <th mat-header-cell *matHeaderCellDef>Korisnicko ime</th>
+        <td mat-cell *matCellDef="let korisnik"> {{korisnik.korisnickoIme}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lozinka">
+            <th mat-header-cell *matHeaderCellDef>Lozinka</th>
+            <td mat-cell *matCellDef="let korisnik"> {{korisnik.lozinka}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="adresa">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let korisnik"> {{korisnik.adresa}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="gradDrzava">
+            <th mat-header-cell *matHeaderCellDef>Grad i drzava stanovanja</th>
+            <td mat-cell *matCellDef="let korisnik"> {{korisnik.gradDrzava}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="azuriraj">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let korisnik">
+              <button mat-raised-button color='primary' (click)='azuriraj(korisnik)'>Azuriraj</button>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="obrisi">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let korisnik">
+              <button mat-raised-button color='primary' (click)='obrisi(korisnik)'>Obrisi</button>
+            </td>
+          </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="kolone"></tr>
+        <tr mat-row *matRowDef="let row; columns: kolone;"></tr>
+    </table>
+</div>
+<ng-template #nemaKorisnika>
+    Nema korisnika.
+</ng-template>
+
