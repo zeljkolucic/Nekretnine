@@ -13,8 +13,6 @@ export class PregledNekretninaComponent implements OnInit {
 
   constructor(private nekretninaService: NekretninaService, private snackBar: MatSnackBar) { }
 
-  slideConfig = {"slidesToShow": 4, "slidesToScroll": 4, "autoplay": true};
-
   ngOnInit(): void {
     this.dohvatiNekretnine();
   }

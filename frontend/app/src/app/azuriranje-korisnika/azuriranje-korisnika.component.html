@@ -1,51 +1,55 @@
 <table>
     <tr>
-        <td>Ime:</td>
-        <td>{{korisnik.ime}}</td>
         <td>
-            <input type='text' [(ngModel)]='ime'>
+            <mat-form-field class='matFormField2' appearance='outline'>
+                <mat-label>Ime</mat-label>
+                <input matInput type='text' [(ngModel)]='ime'>
+            </mat-form-field>
         </td>
     </tr>
     <tr>
-        <td>Prezime:</td>
-        <td>{{korisnik.prezime}}</td>
         <td>
-            <input type='text' [(ngModel)]='prezime'>
+            <mat-form-field class='matFormField2' appearance='outline'>
+                <mat-label>Prezime</mat-label>
+                <input matInput type='text' [(ngModel)]='prezime'>
+            </mat-form-field>
         </td>
     </tr>
     <tr>
-        <td>Korisnicko ime:</td>
-        <td>{{korisnik.korisnickoIme}}</td>
         <td>
-            <input type='text' [(ngModel)]='korisnickoIme'>
+            <mat-form-field class='matFormField2' appearance='outline'>
+                <mat-label>Korisnicko ime</mat-label>
+                <input matInput type='text' [(ngModel)]='korisnickoIme'>
+            </mat-form-field>
         </td>
     </tr>
     <tr>
-        <td>Lozinka:</td>
-        <td>{{korisnik.lozinka}}</td>
         <td>
-            <input type='text' [(ngModel)]='lozinka'>
+            <mat-form-field class='matFormField2' appearance='outline'>
+                <mat-label>Lozinka</mat-label>
+                <input matInput type='text' [(ngModel)]='lozinka'>
+            </mat-form-field>
         </td>
     </tr>
     <tr>
-        <td>Slika:</td>
-        <td>{{korisnik.slika}}</td>
         <td>
-            <input type='text' [(ngModel)]='slika'>
+            <input type='file' name='slike' (change)='odaberiSlike($event)'>
         </td>
     </tr>
     <tr>
-        <td>Email:</td>
-        <td>{{korisnik.adresa}}</td>
         <td>
-            <input type='text' [(ngModel)]='adresa'>
+            <mat-form-field class='matFormField2' appearance='outline'>
+                <mat-label>Email</mat-label>
+                <input matInput type='text' [(ngModel)]='adresa'>
+            </mat-form-field>
         </td>
     </tr>
     <tr>
-        <td>Grad i drzava stanovanja:</td>
-        <td>{{korisnik.gradDrzava}}</td>
         <td>
-            <input type='text' [(ngModel)]='gradDrzava'>
+            <mat-form-field class='matFormField2' appearance='outline'>
+                <mat-label>Grad i drzava stanovanja</mat-label>
+                <input matInput type='text' [(ngModel)]='gradDrzava'>
+            </mat-form-field>
         </td>
     </tr>
 </table>

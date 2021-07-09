@@ -28,9 +28,18 @@ class KorisnikController {
             });
         };
         this.dodajKorisnika = (req, res) => {
-            let korisnik = new korisnik_1.default(req.body);
-            korisnik.save().then(korisnik => { res.json({ 'message': 'ok' }); }).catch(err => {
-                res.json(err);
+            korisnik_1.default.find({}, (err, korisnici) => {
+                if (err)
+                    console.log(err);
+                else {
+                    let korisnik = new korisnik_1.default(req.body);
+                    korisnik.set('idK', korisnici.length + 1);
+                    korisnik.save().then((korisnik) => {
+                        res.status(200).json({ 'message': 'korisnik dodat' });
+                    }).catch((err) => {
+                        res.status(400).json({ 'message': err });
+                    });
+                }
             });
         };
         this.dohvatiSveKorisnike = (req, res) => {

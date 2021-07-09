@@ -20,7 +20,7 @@ import { MaterialModule } from './material/material.module';
 import { PregledZahtevaZaRegistracijuComponent } from './pregled-zahteva-za-registraciju/pregled-zahteva-za-registraciju.component';
 import { PregledKorisnikaSistemaComponent } from './pregled-korisnika-sistema/pregled-korisnika-sistema.component';
 import { PregledNekretninaComponent } from './pregled-nekretnina/pregled-nekretnina.component';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { GrafickiPrikazNekretninaComponent } from './graficki-prikaz-nekretnina/graficki-prikaz-nekretnina.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     PregledZahtevaZaRegistracijuComponent,
     PregledKorisnikaSistemaComponent,
     PregledNekretninaComponent,
+    GrafickiPrikazNekretninaComponent
   ],
   imports: [
     BrowserModule,
@@ -45,8 +46,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    SlickCarouselModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

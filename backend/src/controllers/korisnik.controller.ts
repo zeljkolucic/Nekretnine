@@ -22,10 +22,18 @@ export class KorisnikController {
     }
 
     dodajKorisnika = (req: express.Request, res: express.Response) => {
-        let korisnik = new Korisnik(req.body);
-        korisnik.save().then(korisnik => {res.json({'message': 'ok'})}).catch(err => {
-            res.json(err);
-        })
+        Korisnik.find({}, (err, korisnici) => {
+            if(err) console.log(err);
+            else {
+                let korisnik = new Korisnik(req.body);
+                korisnik.set('idK', korisnici.length + 1);
+                korisnik.save().then((korisnik) => {
+                    res.status(200).json({'message': 'korisnik dodat'});
+                }).catch((err) => {
+                    res.status(400).json({'message': err});
+                })
+            }
+        }) 
     }
 
     dohvatiSveKorisnike = (req: express.Request, res: express.Response) => {

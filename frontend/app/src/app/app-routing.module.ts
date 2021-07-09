@@ -12,6 +12,7 @@ import { RegistrovaniKorisnikComponent } from './registrovani-korisnik/registrov
 import { PregledZahtevaZaRegistracijuComponent } from './pregled-zahteva-za-registraciju/pregled-zahteva-za-registraciju.component';
 import { PregledKorisnikaSistemaComponent } from './pregled-korisnika-sistema/pregled-korisnika-sistema.component';
 import { PregledNekretninaComponent } from './pregled-nekretnina/pregled-nekretnina.component';
+import { GrafickiPrikazNekretninaComponent } from './graficki-prikaz-nekretnina/graficki-prikaz-nekretnina.component';
 
 const routes: Routes = [
   {path: '', component: PregledNekretninaComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
     children: [
       {path: '', component: PregledNekretninaComponent},
       {path: 'pregledNekretnina', component: PregledNekretninaComponent},
+      {path: 'grafickiPrikazNekretnina', component: GrafickiPrikazNekretninaComponent},
       {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent}
     ]
   },
@@ -43,6 +45,7 @@ const routes: Routes = [
       {path: 'pregledZahtevaZaRegistraciju', component: PregledZahtevaZaRegistracijuComponent},
       {path: 'pregledKorisnikaSistema', component: PregledKorisnikaSistemaComponent},
       {path: 'pregledNekretnina', component: PregledNekretninaComponent},
+      {path: 'grafickiPrikazNekretnina', component: GrafickiPrikazNekretninaComponent},
       {path: 'dodavanjeNovogKorisnika', component: DodavanjeNovogKorisnikaComponent},
       {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
       {path: 'promenaLozinke', component: PromenaLozinkeComponent},

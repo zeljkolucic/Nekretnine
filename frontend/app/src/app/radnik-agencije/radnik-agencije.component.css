@@ -19,4 +19,5 @@ mat-sidenav-content {
     padding: 16px;
     height: fit-content;
     min-height: 1200px;
+    overflow-y: hidden;
 }

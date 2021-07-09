@@ -4,6 +4,9 @@ const Schema = mongoose.Schema;
 
 let Korisnik = new Schema(
     {
+        idK: {
+            type: Number
+        },
         ime: {
             type: String
         },
