@@ -6,6 +6,8 @@ import korisnikRouter from './routes/korisnik.routes';
 import zahtevRouter from './routes/zahtev.routes';
 import nekretninaRouter from './routes/nekretnina.routes';
 import multer from 'multer';
+import ponudaRouter from './routes/ponuda.routes';
+import porukaRouter from './routes/poruka.routes';
 
 const app = express();
 app.use(cors());
@@ -21,6 +23,8 @@ const router = express.Router();
 router.use('/korisnik', korisnikRouter);
 router.use('/zahtev', zahtevRouter);
 router.use('/nekretnina', nekretninaRouter);
+router.use('/ponuda', ponudaRouter);
+router.use('poruka', porukaRouter)
 
 const storage = multer.diskStorage({
     destination: (req, file, callBack) => {

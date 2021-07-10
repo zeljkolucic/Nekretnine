@@ -20,5 +20,5 @@
     },
     "include": [
         "src/**/*"
-    ]
+, "../frontend/app/src/app/models/poruka.ts"    ]
 }

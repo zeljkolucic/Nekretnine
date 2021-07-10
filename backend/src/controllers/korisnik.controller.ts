@@ -26,7 +26,11 @@ export class KorisnikController {
             if(err) console.log(err);
             else {
                 let korisnik = new Korisnik(req.body);
-                korisnik.set('idK', korisnici.length + 1);
+                if(korisnici) {
+                    korisnik.set('idK', korisnici.length + 1);
+                } else {
+                    korisnik.set('idK', 1);
+                }
                 korisnik.save().then((korisnik) => {
                     res.status(200).json({'message': 'korisnik dodat'});
                 }).catch((err) => {

@@ -13,6 +13,8 @@ import { PregledZahtevaZaRegistracijuComponent } from './pregled-zahteva-za-regi
 import { PregledKorisnikaSistemaComponent } from './pregled-korisnika-sistema/pregled-korisnika-sistema.component';
 import { PregledNekretninaComponent } from './pregled-nekretnina/pregled-nekretnina.component';
 import { GrafickiPrikazNekretninaComponent } from './graficki-prikaz-nekretnina/graficki-prikaz-nekretnina.component';
+import { NekretninaComponent } from './nekretnina/nekretnina.component';
+import { PregledPorukaComponent } from './pregled-poruka/pregled-poruka.component';
 
 const routes: Routes = [
   {path: '', component: PregledNekretninaComponent},
@@ -25,16 +27,27 @@ const routes: Routes = [
     children: [
       {path: 'promenaLozinke', component: PromenaLozinkeComponent},
       {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
+      {path: 'pregledMojihNekretnina', component: PregledNekretninaComponent},
+      {
+        path: 'pregledNekretnina', 
+        component: PregledNekretninaComponent,
+        children: [
+          {path: 'nekretnina/:idN', component: NekretninaComponent}
+        ]
+      },
+      {path: 'pregledPoruka', component: PregledPorukaComponent}
     ]
   },
   {
     path: 'radnikAgencije', 
     component: RadnikAgencijeComponent,
     children: [
-      {path: '', component: PregledNekretninaComponent},
+      {path: '', component: GrafickiPrikazNekretninaComponent},
       {path: 'pregledNekretnina', component: PregledNekretninaComponent},
       {path: 'grafickiPrikazNekretnina', component: GrafickiPrikazNekretninaComponent},
-      {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent}
+      {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
+      {path: 'promenaLozinke', component: PromenaLozinkeComponent},
+      {path: 'pregledPoruka', component: PregledPorukaComponent}
     ]
   },
   {
@@ -49,11 +62,10 @@ const routes: Routes = [
       {path: 'dodavanjeNovogKorisnika', component: DodavanjeNovogKorisnikaComponent},
       {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
       {path: 'promenaLozinke', component: PromenaLozinkeComponent},
-      {path: 'azuriranjeKorisnika', component: AzuriranjeKorisnikaComponent}
+      {path: 'azuriranjeKorisnika', component: AzuriranjeKorisnikaComponent},
+      {path: 'pregledPoruka', component: PregledPorukaComponent}
     ]
   },
-  {path: 'azuriranjeKorisnika', component: AzuriranjeKorisnikaComponent},   
-  {path: 'promenaLozinke', component: PromenaLozinkeComponent}, 
 ];
 
 @NgModule({

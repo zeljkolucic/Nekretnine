@@ -24,6 +24,29 @@ export class NekretninaController {
         })
     }
 
+    dohvatiPromovisaneNekretnine = (req: express.Request, res: express.Response) => {
+        Nekretnina.find({'promovisana': true}, (err, nekretnine) => {
+            if(err) console.log(err);
+            else res.json(nekretnine);
+        })
+    }
+
+    dohvatiMojeNekretnine = (req: express.Request, res: express.Response) => {
+        let korisnickoIme = req.body.korisnickoIme;
+        Nekretnina.find({'vlasnik': korisnickoIme}, (err, nekretnine) => {
+            if(err) console.log(err);
+            else res.json(nekretnine);
+        })
+    }
+
+    dohvatiNekretninuPoId = (req: express.Request, res: express.Response) => {
+        let idN = req.body.idN;
+        Nekretnina.findOne({'idN': idN}, (err, nekretnina) => {
+            if(err) console.log(err);
+            else res.json(nekretnina);
+        })
+    }
+
     odobriNekretninu = (req: express.Request, res: express.Response) => {
         let idN = req.body.idN;
         Nekretnina.collection.updateOne({'idN': idN}, {$set: {'odobrena': true}}, err => {
@@ -50,7 +73,11 @@ export class NekretninaController {
             if(err) console.log(err);
             else {
                 let nekretnina = new Nekretnina(req.body);
-                nekretnina.set('idN', nekretnine.length + 1);
+                if(nekretnine) {
+                    nekretnina.set('idN', nekretnine.length + 1);
+                } else {
+                    nekretnina.set('idN', 1);
+                }
                 nekretnina.save().then((nekretnina) => {
                     res.status(200).json({'message': 'nekretnina dodata'});
                 }).catch((err) => {
@@ -61,10 +88,11 @@ export class NekretninaController {
     }
 
     pretraziNekretnine = (req: express.Request, res: express.Response) => {
+        let naziv = req.body.naziv;
         let grad = req.body.grad;
         let cenaOd = req.body.cenaOd;
         let cenaDo = req.body.cenaDo;
-        Nekretnina.find({'grad': {$regex: grad}, 'cena': {$gt: cenaOd, $lt: cenaDo}}, (err, nekretnine) => {
+        Nekretnina.find({'naziv': {$regex: naziv}, 'grad': {$regex: grad}, 'cena': {$gt: cenaOd, $lt: cenaDo}}, (err, nekretnine) => {
             if(err) console.log(err);
             else res.json(nekretnine);
         })

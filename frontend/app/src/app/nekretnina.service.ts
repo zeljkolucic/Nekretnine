@@ -22,6 +22,24 @@ export class NekretninaService {
     return this.http.get(`${this.uri}/nekretnina/dohvatiOdobreneNekretnine`);
   }
 
+  dohvatiPromovisaneNekretnine() {
+    return this.http.get(`${this.uri}/nekretnina/dohvatiPromovisaneNekretnine`);
+  }
+
+  dohvatiMojeNekretnine(korisnickoIme) {
+    const podaci = {
+      korisnickoIme: korisnickoIme
+    }
+    return this.http.post(`${this.uri}/nekretnina/dohvatiMojeNekretnine`, podaci);
+  }
+
+  dohvatiNekretninuPoId(idN) {
+    const podaci = {
+      idN: idN
+    }
+    return this.http.post(`${this.uri}/nekretnina/dohvatiNekretninuPoId`, podaci);
+  }
+
   odobriNekretninu(idN) {
     const podaci = {
       idN: idN
@@ -66,11 +84,13 @@ export class NekretninaService {
     return this.http.post(`${this.uri}/nekretnina/dodajNekretninu`, podaci);
   }
 
-  pretraziNekretnine(grad, cenaOd, cenaDo) {
+  pretraziNekretnine(naziv, grad, cenaOd, cenaDo) {
+    if(!naziv) naziv = '';
     if(!grad) grad = '';
     if(!cenaOd) cenaOd = -1;
     if(!cenaDo) cenaDo = 1000000000000;
     const podaci = {
+      naziv: naziv,
       grad: grad,
       cenaOd: cenaOd,
       cenaDo: cenaDo

@@ -1,17 +1,93 @@
-<div>
-    <mat-card class='matCard'>
-        <mat-card-title>{{nekretnina.naziv}}</mat-card-title>    
-        <mat-card-content>
-            <img src={{nekretnina.galerija[0]}} height='490px' width='734px'>
-        </mat-card-content>
-        <mat-card-content>{{nekretnina.adresa}}, {{nekretnina.opstina}}, {{nekretnina.grad}}</mat-card-content>
-        <mat-card-content>Cena: {{nekretnina.cena}}</mat-card-content>
-        <mat-card-content *ngIf="nekretnina.tipNekretnine == 'kuca'">Kuca</mat-card-content>
-        <mat-card-content *ngIf="nekretnina.tipNekretnine == 'stan'">{{nekretnina.brojSoba}} stan</mat-card-content>
-        <mat-card-content>Kvadratura: {{nekretnina.povrsina}}</mat-card-content>
-        <mat-card-content>{{nekretnina.tipOglasa}}</mat-card-content>
-        <mat-card-actions align='end'>
-            <button mat-raised-button color='primary'>Promovisi</button>
-        </mat-card-actions>
-    </mat-card>
+<div class='carousel'>
+    <ngb-carousel>
+        <ng-template ngbSlide *ngFor="let slika of nekretnina.galerija">
+            <div class="picsum-img-wrapper">
+            <img src={{slika}} width='100%' alt="Random first slide">
+            </div>
+            <div class="carousel-caption">
+            <h1>
+                {{nekretnina.naziv}}
+            </h1>
+            <h2>{{nekretnina.opstina}}, {{nekretnina.grad}}</h2>
+            </div>
+        </ng-template>
+    </ngb-carousel>
 </div>
+<div id='podaciIKontakt'>
+    <div>
+        <h1>{{nekretnina.naziv}}</h1>
+        <table>
+            <tr>
+                <td>Grad:</td>
+                <td>{{nekretnina.grad}}</td>
+            </tr>
+            <tr>
+                <td>Opstina:</td>
+                <td>{{nekretnina.opstina}}</td>
+            </tr>
+            <tr>
+                <td>Adresa:</td>
+                <td>{{nekretnina.adresa}}</td>
+            </tr>
+            <tr>
+                <td>Tip nekretnine:</td>
+                <td>{{nekretnina.tipNekretnine}}</td>
+            </tr>
+            <tr>
+                <td>Broj spratova:</td>
+                <td>{{nekretnina.brojSpratova}}</td>
+            </tr>
+            <tr *ngIf="nekretnina.tipNekretnine == 'stan'">
+                <td>Sprat:</td>
+                <td>{{nekretnina.sprat}}</td>
+            </tr>
+            <tr>
+                <td>Kvadratura:</td>
+                <td>{{nekretnina.povrsina}}</td>
+            </tr>
+            <tr>
+                <td>Broj soba:</td>
+                <td>{{nekretnina.brojSoba}}</td>
+            </tr>
+            <tr>
+                <td>Namestena:</td>
+                <td>{{nekretnina.namestena ? 'da' : 'ne'}}</td>
+            </tr>
+            <tr>
+                <td>Tip oglasa:</td>
+                <td>{{nekretnina.tipOglasa}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Cena:</b>
+                </td>
+                <td>
+                    <b>{{nekretnina.cena}}</b>
+                </td>
+            </tr>
+        </table>
+        <div *ngIf='!mojaNekretnina()'>
+            <mat-radio-group class='matFormField' [(ngModel)]='nacinPlacanja'>
+                <mat-radio-button labelPosition='before' value='Kredit'>Kredit</mat-radio-button>
+                <mat-radio-button labelPosition='before' value='Gotovina'>Gotovina</mat-radio-button>
+            </mat-radio-group>
+            <br>
+            <mat-form-field class='matFormField' appearance='outline'>
+                <mat-label>Iznos</mat-label>
+                <input matInput type='number' [(ngModel)]='ponuda'>
+            </mat-form-field>
+            <button mat-raised-button color='primary' class='matFormField' (click)='ponudi()'>Ponudi</button>
+            <div *ngIf="nacinPlacanja == 'Kredit' && ponuda != null">
+                Ucesce: {{ponuda * 0.2}}
+            </div>
+        </div>
+    </div>
+
+    <div id='kontakt'>
+        <button mat-raised-button color='primary' class='matFormField' (click)='otvoriDialog()'>Kontakt</button>
+        <div>
+
+        </div>
+    </div>
+</div>
+

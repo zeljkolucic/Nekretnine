@@ -1,0 +1,18 @@
+.matFormField {
+    width: 200px;
+    margin-right: 1rem;
+}
+
+mat-radio-button {
+    padding-right: 1rem;
+}
+
+#sprat {
+    margin-left: 1rem;
+}
+
+#podaciIKontakt {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-between;
+}

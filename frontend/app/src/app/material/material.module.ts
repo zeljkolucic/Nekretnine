@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const material = [
   MatButtonModule, 
@@ -22,7 +23,8 @@ const material = [
   MatCheckboxModule,
   MatRadioModule,
   MatSnackBarModule,
-  MatTableModule
+  MatTableModule,
+  MatDialogModule
 ]
 
 @NgModule({

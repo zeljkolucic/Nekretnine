@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>{{data.nekretnina.naziv}}</h1>
+<div mat-dialog-content>
+  <mat-form-field style='width: 100%' appearance="outline">
+    <mat-label>Tekst poruke</mat-label>
+    <textarea matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="3" [(ngModel)]='tekstPoruke'></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style='display: flex; flex-direction: row;'>
+  <button mat-raised-button style='width: 220px' (click)='onNoClick()'>Nazad</button>
+  <button mat-raised-button style='width: 220px' color='primary' (click)='posaljiPoruku()'>Posalji</button>
+</div>

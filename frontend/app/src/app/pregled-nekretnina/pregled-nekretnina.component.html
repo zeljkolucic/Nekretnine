@@ -1,4 +1,24 @@
-<div *ngIf="tipKorisnika() == 'gost'">
+<div class='carousel' *ngIf="(tipKorisnika() == 'gost' || prikazGalerijeZaRegistrovanogKorisnika()) && promovisaneNekretnine != null && promovisaneNekretnine.length != 0">
+    <ngb-carousel>
+        <ng-template ngbSlide *ngFor="let nekretnina of promovisaneNekretnine">
+            <div class="picsum-img-wrapper">
+            <img src={{nekretnina.galerija[0]}} width='100%' alt="Random first slide">
+            </div>
+            <div class="carousel-caption">
+            <h1>
+                {{nekretnina.naziv}}
+            </h1>
+            <h2>{{nekretnina.opstina}}, {{nekretnina.grad}}</h2>
+            </div>
+        </ng-template>
+    </ngb-carousel>
+</div>
+
+<div class='pretraga' *ngIf="tipKorisnika() == 'gost' || prikazGalerijeZaRegistrovanogKorisnika()">
+    <mat-form-field class='matFormField' appearance='outline'>
+        <mat-label>Naziv</mat-label>
+        <input matInput type='text' [(ngModel)]='naziv'>
+    </mat-form-field>
     <mat-form-field class='matFormField' appearance='outline'>
         <mat-label>Grad</mat-label>
         <input matInput type='text' [(ngModel)]='grad'>
@@ -13,25 +33,34 @@
     </mat-form-field>
     <button class='matFormField' mat-raised-button color='primary' (click)='pretrazi()'>Pretrazi</button>
 </div>
-<div *ngIf='nekretnine != null && nekretnine.length != 0; else nemaNekretnina'>
-    <div *ngFor='let nekretnina of nekretnine'>
-        <mat-card class='matCard'>
-            <mat-card-title>{{nekretnina.naziv}}</mat-card-title>    
-            <mat-card-content>
-                <img [src]='slucajnaSlika(nekretnina)' height='490px' width='734px'>
-            </mat-card-content>
-            <mat-card-content>{{nekretnina.grad}}, {{nekretnina.opstina}}</mat-card-content>
-            <mat-card-content>Cena: {{nekretnina.cena}}</mat-card-content>
-            <mat-card-content *ngIf="nekretnina.tipNekretnine == 'kuca'">Kuca</mat-card-content>
-            <mat-card-content *ngIf="nekretnina.tipNekretnine == 'stan'">{{nekretnina.brojSoba}} stan</mat-card-content>
-            <mat-card-content>Kvadratura: {{nekretnina.povrsina}}</mat-card-content>
-            <mat-card-content>{{nekretnina.tipOglasa}}</mat-card-content>
-            <mat-card-actions align='end'>
-                <button mat-raised-button color='primary' *ngIf="tipKorisnika() == 'radnik agencije' && !nekretnina.promovisana" (click)='promovisi(nekretnina)'>Promovisi</button>
-                <button mat-raised-button color='primary'*ngIf="tipKorisnika() == 'radnik agencije' && nekretnina.promovisana" (click)='ukloniIzPromovisanih(nekretnina)'>Ukloni iz promovisanih</button>
-                <button mat-raised-button color='primary' *ngIf="(tipKorisnika() == 'administrator' || tipKorisnika() == 'radnik agencije') && nekretnina.odobrena == false" (click)='odobri(nekretnina)'>Odobri</button>
-            </mat-card-actions>
-        </mat-card>
+
+<div *ngIf='pregledNekretnina()'>
+    <div class='nekretnine' *ngIf='nekretnine != null && nekretnine.length != 0; else nemaNekretnina'>
+        <div *ngFor='let nekretnina of nekretnine'>
+            <mat-card class='matCard'>
+                <mat-card-title>{{nekretnina.naziv}}</mat-card-title>    
+                <mat-card-content>
+                    <a routerLink='nekretnina/{{nekretnina.idN}}' routerLinkActive="tipKorisnika() == 'registrovani korisnik' && !prikazGalerijeZaRegistrovanogKorisnika()">
+                        <img [src]='slucajnaSlika(nekretnina)' height='490px' width='734px'>
+                    </a>
+                </mat-card-content>
+                <mat-card-content>{{nekretnina.grad}}, {{nekretnina.opstina}}</mat-card-content>
+                <mat-card-content>Cena: {{nekretnina.cena}}</mat-card-content>
+                <mat-card-content *ngIf="nekretnina.tipNekretnine == 'kuca'">Kuca</mat-card-content>
+                <mat-card-content *ngIf="nekretnina.tipNekretnine == 'stan'">{{nekretnina.brojSoba}} stan</mat-card-content>
+                <mat-card-content>Kvadratura: {{nekretnina.povrsina}}</mat-card-content>
+                <mat-card-content>{{nekretnina.tipOglasa}}</mat-card-content>
+                <mat-card-actions align='end'>
+                    <button mat-raised-button color='primary' *ngIf="tipKorisnika() == 'radnik agencije' && !nekretnina.promovisana" (click)='promovisi(nekretnina)'>Promovisi</button>
+                    <button mat-raised-button color='primary'*ngIf="tipKorisnika() == 'radnik agencije' && nekretnina.promovisana" (click)='ukloniIzPromovisanih(nekretnina)'>Ukloni iz promovisanih</button>
+                    <button mat-raised-button color='primary' *ngIf="(tipKorisnika() == 'administrator' || tipKorisnika() == 'radnik agencije') && nekretnina.odobrena == false" (click)='odobri(nekretnina)'>Odobri</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
     </div>
+    <ng-template #nemaNekretnina>Nema nekretnina.</ng-template>
 </div>
-<ng-template #nemaNekretnina>Nema nekretnina.</ng-template>
+
+<div *ngIf='!pregledNekretnina()'>
+    <router-outlet></router-outlet>
+</div>

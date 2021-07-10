@@ -15,6 +15,18 @@ nekretninaRouter.route('/dohvatiOdobreneNekretnine').get(
     (req, res) => new NekretninaController().dohvatiOdobreneNekretnine(req, res)
 )
 
+nekretninaRouter.route('/dohvatiPromovisaneNekretnine').get(
+    (req, res) => new NekretninaController().dohvatiPromovisaneNekretnine(req, res)
+)
+
+nekretninaRouter.route('/dohvatiMojeNekretnine').post(
+    (req, res) => new NekretninaController().dohvatiMojeNekretnine(req, res)
+)
+
+nekretninaRouter.route('/dohvatiNekretninuPoId').post(
+    (req, res) => new NekretninaController().dohvatiNekretninuPoId(req, res)
+)
+
 nekretninaRouter.route('/odobriNekretninu').post(
     (req, res) => new NekretninaController().odobriNekretninu(req, res)
 )

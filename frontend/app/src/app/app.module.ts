@@ -21,6 +21,9 @@ import { PregledZahtevaZaRegistracijuComponent } from './pregled-zahteva-za-regi
 import { PregledKorisnikaSistemaComponent } from './pregled-korisnika-sistema/pregled-korisnika-sistema.component';
 import { PregledNekretninaComponent } from './pregled-nekretnina/pregled-nekretnina.component';
 import { GrafickiPrikazNekretninaComponent } from './graficki-prikaz-nekretnina/graficki-prikaz-nekretnina.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DialogPorukaComponent } from './dialog-poruka/dialog-poruka.component';
+import { PregledPorukaComponent } from './pregled-poruka/pregled-poruka.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { GrafickiPrikazNekretninaComponent } from './graficki-prikaz-nekretnina/
     PregledZahtevaZaRegistracijuComponent,
     PregledKorisnikaSistemaComponent,
     PregledNekretninaComponent,
-    GrafickiPrikazNekretninaComponent
+    GrafickiPrikazNekretninaComponent,
+    DialogPorukaComponent,
+    PregledPorukaComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,8 @@ import { GrafickiPrikazNekretninaComponent } from './graficki-prikaz-nekretnina/
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

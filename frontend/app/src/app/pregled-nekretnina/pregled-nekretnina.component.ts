@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Korisnik } from '../models/korisnik';
 import { Nekretnina } from '../models/nekretnina';
 import { NekretninaService } from '../nekretnina.service';
@@ -11,26 +12,58 @@ import { NekretninaService } from '../nekretnina.service';
 })
 export class PregledNekretninaComponent implements OnInit {
 
-  constructor(private nekretninaService: NekretninaService, private snackBar: MatSnackBar) { }
+  constructor(private nekretninaService: NekretninaService, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
     this.dohvatiNekretnine();
+    this.dohvatiNekretnineZaGaleriju();
   }
 
   nekretnine: Nekretnina[];
+  promovisaneNekretnine: Nekretnina[];
 
+  naziv: string;
   grad: string;
   cenaOd: number;
   cenaDo: number;
 
   dohvatiNekretnine(): void {
     let korisnik: Korisnik = JSON.parse(localStorage.getItem('ulogovan'));
-    korisnik == null ? this.dohvatiOdobreneNekretnine() : (korisnik.tip == 'administrator') ? this.dohvatiNeodobreneNekretnine() : this.dohvatiSveNekretnine();
+    if(korisnik == null) {
+      this.dohvatiOdobreneNekretnine();
+    } else if(korisnik.tip == 'administrator') {
+      this.dohvatiNeodobreneNekretnine();
+    } else if(korisnik.tip == 'radnik agencije') {
+      this.dohvatiSveNekretnine();
+    } else if(korisnik.tip == 'registrovani korisnik') {
+      console.log(this.router.url);
+      if(this.router.url === '/registrovaniKorisnik/pregledMojihNekretnina') {
+        this.dohvatiMojeNekretnine(korisnik.korisnickoIme);
+      } else {
+        this.dohvatiOdobreneNekretnine();
+      }
+    }
+  }
+
+  prikazGalerijeZaRegistrovanogKorisnika(): boolean {
+    return this.router.url === '/registrovaniKorisnik/pregledNekretnina';
+  }
+
+  pregledNekretnina(): boolean {
+    return this.router.url === '/pregledNekretnina' || this.router.url === '/registrovaniKorisnik/pregledNekretnina' || 
+      this.router.url === '/registrovaniKorisnik/pregledMojihNekretnina' || this.router.url === '/radnikAgencije/pregledNekretnina' ||
+      this.router.url === '/administrator/pregledNekretnina' || this.router.url === '/';
   }
 
   dohvatiSveNekretnine() {
     this.nekretninaService.dohvatiSveNekretnine().subscribe((nekretnine: Nekretnina[]) => {
       this.nekretnine = nekretnine;
+    })
+  }
+
+  dohvatiNekretnineZaGaleriju() {
+    this.nekretninaService.dohvatiPromovisaneNekretnine().subscribe((nekretnine: Nekretnina[]) => {
+      this.promovisaneNekretnine = nekretnine;
     })
   }
 
@@ -42,6 +75,12 @@ export class PregledNekretninaComponent implements OnInit {
 
   dohvatiOdobreneNekretnine() {
     this.nekretninaService.dohvatiOdobreneNekretnine().subscribe((nekretnine: Nekretnina[]) => {
+      this.nekretnine = nekretnine;
+    })
+  }
+
+  dohvatiMojeNekretnine(korisnickoIme) {
+    this.nekretninaService.dohvatiMojeNekretnine(korisnickoIme).subscribe((nekretnine: Nekretnina[]) => {
       this.nekretnine = nekretnine;
     })
   }
@@ -74,10 +113,10 @@ export class PregledNekretninaComponent implements OnInit {
   }
 
   pretrazi() {
-    if(!this.grad && !this.cenaOd && !this.cenaDo) {
+    if(!this.naziv && !this.grad && !this.cenaOd && !this.cenaDo) {
       this.otvoriSnackBar('Unesite barem jedan od parametara!');
     } else {
-      this.nekretninaService.pretraziNekretnine(this.grad, this.cenaOd, this.cenaDo).subscribe((nekretnine: Nekretnina[]) => {
+      this.nekretninaService.pretraziNekretnine(this.naziv, this.grad, this.cenaOd, this.cenaDo).subscribe((nekretnine: Nekretnina[]) => {
         this.nekretnine = nekretnine;
       })
     }
