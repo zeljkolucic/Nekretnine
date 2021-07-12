@@ -24,6 +24,8 @@ import { GrafickiPrikazNekretninaComponent } from './graficki-prikaz-nekretnina/
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogPorukaComponent } from './dialog-poruka/dialog-poruka.component';
 import { PregledPorukaComponent } from './pregled-poruka/pregled-poruka.component';
+import { ChartsModule } from 'ng2-charts';
+import { AzuriranjeNekretnineComponent } from './azuriranje-nekretnine/azuriranje-nekretnine.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { PregledPorukaComponent } from './pregled-poruka/pregled-poruka.componen
     PregledNekretninaComponent,
     GrafickiPrikazNekretninaComponent,
     DialogPorukaComponent,
-    PregledPorukaComponent
+    PregledPorukaComponent,
+    AzuriranjeNekretnineComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { PregledPorukaComponent } from './pregled-poruka/pregled-poruka.componen
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    NgbModule
+    NgbModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

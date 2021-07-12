@@ -84,6 +84,26 @@ export class NekretninaService {
     return this.http.post(`${this.uri}/nekretnina/dodajNekretninu`, podaci);
   }
 
+  azurirajNekretninu(idN, naziv, adresa, opstina, grad, tipNekretnine, brojSpratova, sprat, povrsina, brojSoba, namestena, tipOglasa, cena, galerija) {
+    const podaci = {
+      idN: idN,
+      naziv: naziv,
+      adresa: adresa,
+      opstina: opstina,
+      grad: grad,
+      tipNekretnine: tipNekretnine,
+      brojSpratova: brojSpratova,
+      sprat: sprat,
+      povrsina: povrsina,
+      brojSoba: brojSoba,
+      namestena: namestena, 
+      tipOglasa: tipOglasa,
+      cena: cena,
+      galerija: galerija
+    }
+    return this.http.post(`${this.uri}/nekretnina/azurirajNekretninu`, podaci);
+  }
+
   pretraziNekretnine(naziv, grad, cenaOd, cenaDo) {
     if(!naziv) naziv = '';
     if(!grad) grad = '';
@@ -96,6 +116,29 @@ export class NekretninaService {
       cenaDo: cenaDo
     }
     return this.http.post(`${this.uri}/nekretnina/pretraziNekretnine`, podaci);
+  }
+
+  dohvatiBrojNekretninaUGradu(grad: string) {
+    const podaci = {
+      grad: grad
+    }
+    return this.http.post(`${this.uri}/nekretnina/dohvatiBrojNekretninaUGradu`, podaci);
+  }
+
+  dohvatiBrojKucaKojeSeIzdaju() {
+    return this.http.get(`${this.uri}/nekretnina/dohvatiBrojKucaKojeSeIzdaju`);
+  }
+
+  dohvatiBrojKucaKojeSeProdaju() {
+    return this.http.get(`${this.uri}/nekretnina/dohvatiBrojKucaKojeSeProdaju`);
+  }
+
+  dohvatiBrojStanovaKojiSeIzdaju() {
+    return this.http.get(`${this.uri}/nekretnina/dohvatiBrojStanovaKojiSeIzdaju`);
+  }
+
+  dohvatiBrojStanovaKojiSeProdaju() {
+    return this.http.get(`${this.uri}/nekretnina/dohvatiBrojStanovaKojiSeProdaju`);
   }
 
 }

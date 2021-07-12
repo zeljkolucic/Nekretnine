@@ -1,10 +1,9 @@
 export class Poruka {
-    idP: number;
+    idPor: number;
     naslov: string;
-    posiljalac: string;
     primalac: string;
+    posiljalac: string;
     tekst: string;
-    datum: string; 
     procitana: boolean;
     arhivirana: boolean;
 }

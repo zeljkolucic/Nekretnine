@@ -12,11 +12,11 @@ const zahtev_routes_1 = __importDefault(require("./routes/zahtev.routes"));
 const nekretnina_routes_1 = __importDefault(require("./routes/nekretnina.routes"));
 const multer_1 = __importDefault(require("multer"));
 const ponuda_routes_1 = __importDefault(require("./routes/ponuda.routes"));
-const poruka_routes_1 = __importDefault(require("./routes/poruka.routes"));
+const sanduce_routes_1 = __importDefault(require("./routes/sanduce.routes"));
 const app = express_1.default();
 app.use(cors_1.default());
 app.use(body_parser_1.default.json());
-mongoose_1.default.connect("mongodb://localhost:27017/nekretnine2021");
+mongoose_1.default.connect("mongodb://localhost:27017/nekretnine2021", { useNewUrlParser: true });
 const conn = mongoose_1.default.connection;
 conn.once('open', () => {
     console.log("Konekcija sa bazom je uspesna");
@@ -26,7 +26,7 @@ router.use('/korisnik', korisnik_routes_1.default);
 router.use('/zahtev', zahtev_routes_1.default);
 router.use('/nekretnina', nekretnina_routes_1.default);
 router.use('/ponuda', ponuda_routes_1.default);
-router.use('poruka', poruka_routes_1.default);
+router.use('/sanduce', sanduce_routes_1.default);
 const storage = multer_1.default.diskStorage({
     destination: (req, file, callBack) => {
         callBack(null, '../frontend/app/src/assets');

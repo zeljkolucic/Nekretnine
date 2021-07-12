@@ -28,6 +28,7 @@ export class PrijavaComponent implements OnInit {
       this.korisnikService.prijava(this.korisnickoIme, this.lozinka, this.tip).subscribe((korisnik: Korisnik) => {
         if(korisnik) {
           localStorage.setItem('ulogovan', JSON.stringify(korisnik));
+          this.korisnikService.subject.next(true);
           this.korisnikService.postaviLoginStatus(true);
           if(korisnik.tip == 'registrovani korisnik') {
             this.router.navigate(['registrovaniKorisnik']);

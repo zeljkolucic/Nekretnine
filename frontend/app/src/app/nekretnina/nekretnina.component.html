@@ -81,13 +81,14 @@
                 Ucesce: {{ponuda * 0.2}}
             </div>
         </div>
+       
     </div>
 
-    <div id='kontakt'>
+    <div id='kontakt' *ngIf='!mojaNekretnina()'>
         <button mat-raised-button color='primary' class='matFormField' (click)='otvoriDialog()'>Kontakt</button>
-        <div>
-
-        </div>
+    </div>
+    <div *ngIf='mojaNekretnina()'>
+        <button mat-raised-button color='primary' class='matFormField' (click)='azuriraj()'>Azuriraj</button>
     </div>
 </div>
 

@@ -24,6 +24,7 @@ export class AdministratorComponent implements OnInit {
 
   odjaviSe() {
     localStorage.removeItem('ulogovan');
+    this.korisnikService.ulogovan = false;
     this.korisnikService.postaviLoginStatus(false);
     this.router.navigate(['']);
   }  

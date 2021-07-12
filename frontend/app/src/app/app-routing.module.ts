@@ -15,6 +15,7 @@ import { PregledNekretninaComponent } from './pregled-nekretnina/pregled-nekretn
 import { GrafickiPrikazNekretninaComponent } from './graficki-prikaz-nekretnina/graficki-prikaz-nekretnina.component';
 import { NekretninaComponent } from './nekretnina/nekretnina.component';
 import { PregledPorukaComponent } from './pregled-poruka/pregled-poruka.component';
+import { AzuriranjeNekretnineComponent } from './azuriranje-nekretnine/azuriranje-nekretnine.component';
 
 const routes: Routes = [
   {path: '', component: PregledNekretninaComponent},
@@ -35,7 +36,8 @@ const routes: Routes = [
           {path: 'nekretnina/:idN', component: NekretninaComponent}
         ]
       },
-      {path: 'pregledPoruka', component: PregledPorukaComponent}
+      {path: 'pregledPoruka', component: PregledPorukaComponent},
+      {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent}
     ]
   },
   {
@@ -47,7 +49,8 @@ const routes: Routes = [
       {path: 'grafickiPrikazNekretnina', component: GrafickiPrikazNekretninaComponent},
       {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
       {path: 'promenaLozinke', component: PromenaLozinkeComponent},
-      {path: 'pregledPoruka', component: PregledPorukaComponent}
+      {path: 'pregledPoruka', component: PregledPorukaComponent},
+      {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent}
     ]
   },
   {
@@ -63,7 +66,8 @@ const routes: Routes = [
       {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
       {path: 'promenaLozinke', component: PromenaLozinkeComponent},
       {path: 'azuriranjeKorisnika', component: AzuriranjeKorisnikaComponent},
-      {path: 'pregledPoruka', component: PregledPorukaComponent}
+      {path: 'pregledPoruka', component: PregledPorukaComponent},
+      {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent}
     ]
   },
 ];

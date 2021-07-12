@@ -1,7 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Nekretnina } from '../models/nekretnina';
-import { PorukaService } from '../poruka.service';
 import { DialogData } from '../nekretnina/nekretnina.component';
 
 @Component({
@@ -17,8 +15,7 @@ export class DialogPorukaComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogPorukaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private porukaService: PorukaService) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -27,7 +24,8 @@ export class DialogPorukaComponent implements OnInit {
   tekstPoruke: string;
 
   posaljiPoruku() {
-
+    //this.porukaService.posaljiPoruku(this.data.nekretnina.naziv, this.data.korisnik.korisnickoIme, this.data.nekretnina.vlasnik, this.tekstPoruke, '2021-07-11').subscribe();
+    this.dialogRef.close();
   }
 
 

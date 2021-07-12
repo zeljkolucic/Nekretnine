@@ -61,10 +61,11 @@ export class AzuriranjeKorisnikaComponent implements OnInit {
     })
   }
 
-  odaberiSlike(event) {
+  odaberiSliku(event) {
     if(event.target.files.length > 0) {
       const file = event.target.files[0];
       this.fajlSlika = file;
+      this.slika = '../assets/' + event.target.files[0].name;
     }
   }
 

@@ -31,25 +31,25 @@ export class RegistracijaComponent implements OnInit {
 
   registracija() {
     if(!this.ime || !this.prezime || !this.korisnickoIme || !this.lozinka || !this.potvrdaLozinke || !this.adresa || !this.gradDrzava) {
-      this.otvoriSnackBar('Unesite preostala polja!');
+      this.prikaziSnackBar('Unesite preostala polja!');
     } else {
       this.korisnikService.dohvatiKorisnika(this.korisnickoIme).subscribe((korisnik: Korisnik) => {
         if(korisnik) {
-          this.otvoriSnackBar('Korisnicko ime je zauzeto!');
+          this.prikaziSnackBar('Korisnicko ime je zauzeto!');
         } else {
           let regexLozinka = /^(?!.*([A-Za-z0-9!@#$%^&*()_+{}[\]|\\\/?.,><:"';])\1{3})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}[\]|\\\/?.,><:"';])[A-Za-z\d!@#$%^&*()_+{}[\]|\\\/?.,><:"';]{8,24}$/;
           let regexEmail = /^\w{4,}@\w+\.\w{2,3}$/;
           if(!regexLozinka.test(this.lozinka)) {
-            this.otvoriSnackBar('Lozinka nije dovoljno jaka!');
+            this.prikaziSnackBar('Lozinka nije dovoljno jaka!');
           } else if(this.lozinka != this.potvrdaLozinke) {
-            this.otvoriSnackBar('Lozinke se ne podudaraju!');
+            this.prikaziSnackBar('Lozinke se ne podudaraju!');
           } else if(!regexEmail.test(this.adresa)) {
-            this.otvoriSnackBar('Email nije u odgovarajucem formatu!');
+            this.prikaziSnackBar('Email nije u odgovarajucem formatu!');
           } else {
             if(!this.slika) 
               this.slika = 'podrazumevano.png'; 
             this.slika = '../assets/' + this.slika;
-            this.otvoriSnackBar('Zahtev za registracijom uspesno poslat!');
+            this.prikaziSnackBar('Zahtev za registracijom uspesno poslat!');
             const formData = new FormData();
             formData.append('file', this.fajlSlika);
 
@@ -70,10 +70,11 @@ export class RegistracijaComponent implements OnInit {
     if(event.target.files.length > 0) {
       const file = event.target.files[0];
       this.fajlSlika = file;
+      this.slika = '../assets/' + event.target.files[0].name;
     }
   }
 
-  otvoriSnackBar(poruka) {
+  prikaziSnackBar(poruka) {
     this.snackBar.open(poruka, '', {duration: 3000});
   }
 

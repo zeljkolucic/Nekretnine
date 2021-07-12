@@ -8,11 +8,16 @@ import { Korisnik } from './models/korisnik';
 })
 export class KorisnikService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.subject.next(localStorage.getItem('ulogovan') !== null);
+  }
 
   private loginStatus = new BehaviorSubject<boolean>(this.proveriLoginStatus());
   private korisnickoIme = new BehaviorSubject<string>(this.dohvatiKorisnickoIme());
   private tipKorisnika = new BehaviorSubject<string>(this.dohvatiTipKorisnika());
+
+  public subject = new BehaviorSubject<boolean>(false);
+  public ulogovan: boolean = false;
 
   uri = 'http://localhost:4000';
 

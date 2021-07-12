@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PorukaService } from './poruka.service';
+import { SanduceService } from './sanduce.service';
 
-describe('PorukaService', () => {
-  let service: PorukaService;
+describe('SanduceService', () => {
+  let service: SanduceService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PorukaService);
+    service = TestBed.inject(SanduceService);
   });
 
   it('should be created', () => {

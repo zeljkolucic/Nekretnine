@@ -6,22 +6,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
 let Poruka = new Schema({
-    idP: {
-        type: Number
-    },
-    naslov: {
+    idPor: {
         type: String
     },
-    posiljalac: {
+    naslov: {
         type: String
     },
     primalac: {
         type: String
     },
-    tekst: {
+    posiljalac: {
         type: String
     },
-    datum: {
+    tekst: {
         type: String
     },
     procitana: {
@@ -31,5 +28,5 @@ let Poruka = new Schema({
         type: Boolean
     }
 });
-exports.default = mongoose_1.default.model('Poruka', Poruka, 'poruke');
+exports.default = mongoose_1.default.model('Poruka', Poruka, 'poruka');
 //# sourceMappingURL=poruka.js.map

@@ -87,12 +87,70 @@ export class NekretninaController {
         })  
     }
 
+    azurirajNekretninu = (req: express.Request, res: express.Response) => {
+        let idN = req.body.idN;
+        let naziv = req.body.naziv;
+        let adresa = req.body.adresa;
+        let opstina = req.body.opstina;
+        let grad = req.body.grad;
+        let tipNekretnine = req.body.tipNekretnine;
+        let brojSpratova = req.body.brojSpratova;
+        let sprat = req.body.sprat;
+        let povrsina = req.body.povrsina;
+        let brojSoba = req.body.brojSoba;
+        let namestena = req.body.namestena;
+        let tipOglasa = req.body.tipOglasa;
+        let cena = req.body.cena;
+        let galerija = req.body.galerija;
+        Nekretnina.collection.updateOne({'idN' : idN}, {$set: {'naziv': naziv, 'adresa': adresa, 'opstina': opstina,
+            'grad': grad, 'tipNekretnine': tipNekretnine, 'brojSpratova': brojSpratova, 'sprat': sprat, 'povrsina': povrsina,
+            'brojSoba': brojSoba, 'namestena': namestena, 'tipOglasa': tipOglasa, 'cena': cena, 'galerija': galerija}}, err => {
+            if(err) console.log(err);
+        }) 
+    }
+
     pretraziNekretnine = (req: express.Request, res: express.Response) => {
         let naziv = req.body.naziv;
         let grad = req.body.grad;
         let cenaOd = req.body.cenaOd;
         let cenaDo = req.body.cenaDo;
         Nekretnina.find({'naziv': {$regex: naziv}, 'grad': {$regex: grad}, 'cena': {$gt: cenaOd, $lt: cenaDo}}, (err, nekretnine) => {
+            if(err) console.log(err);
+            else res.json(nekretnine);
+        })
+    }
+
+    dohvatiBrojNekretninaUGradu = (req: express.Request, res: express.Response) => {
+        let grad = req.body.grad;
+        Nekretnina.find({'grad': grad}, (err, nekretnine) => {
+            if(err) console.log(err);
+            else res.json(nekretnine.length);
+        })
+    }
+
+    dohvatiBrojKucaKojeSeIzdaju = (req: express.Request, res: express.Response) => {
+        Nekretnina.find({'tipNekretnine': 'kuca', 'tipOglasa': 'Izdavanje'}, (err, nekretnine) => {
+            if(err) console.log(err);
+            else res.json(nekretnine.length);
+        })
+    }
+
+    dohvatiBrojKucaKojeSeProdaju = (req: express.Request, res: express.Response) => {
+        Nekretnina.find({'tipNekretnine': 'kuca', 'tipOglasa': 'Prodaja'}, (err, nekretnine) => {
+            if(err) console.log(err);
+            else res.json(nekretnine);
+        })
+    }
+
+    dohvatiBrojStanovaKojiSeIzdaju = (req: express.Request, res: express.Response) => {
+        Nekretnina.find({'tipNekretnine': 'stan', 'tipOglasa': 'Izdavanje'}, (err, nekretnine) => {
+            if(err) console.log(err);
+            else res.json(nekretnine);
+        })
+    }
+
+    dohvatiBrojStanovaKojiSeProdaju = (req: express.Request, res: express.Response) => {
+        Nekretnina.find({'tipNekretnine': 'stan', 'tipOglasa': 'Prodaja'}, (err, nekretnine) => {
             if(err) console.log(err);
             else res.json(nekretnine);
         })
