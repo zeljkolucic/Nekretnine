@@ -14,8 +14,8 @@ import { PregledKorisnikaSistemaComponent } from './pregled-korisnika-sistema/pr
 import { PregledNekretninaComponent } from './pregled-nekretnina/pregled-nekretnina.component';
 import { GrafickiPrikazNekretninaComponent } from './graficki-prikaz-nekretnina/graficki-prikaz-nekretnina.component';
 import { NekretninaComponent } from './nekretnina/nekretnina.component';
-import { PregledPorukaComponent } from './pregled-poruka/pregled-poruka.component';
 import { AzuriranjeNekretnineComponent } from './azuriranje-nekretnine/azuriranje-nekretnine.component';
+import { PregledPonudaComponent } from './pregled-ponuda/pregled-ponuda.component';
 
 const routes: Routes = [
   {path: '', component: PregledNekretninaComponent},
@@ -36,8 +36,8 @@ const routes: Routes = [
           {path: 'nekretnina/:idN', component: NekretninaComponent}
         ]
       },
-      {path: 'pregledPoruka', component: PregledPorukaComponent},
-      {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent}
+      {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent},
+      {path: 'pregledPonuda', component: PregledPonudaComponent}
     ]
   },
   {
@@ -49,8 +49,8 @@ const routes: Routes = [
       {path: 'grafickiPrikazNekretnina', component: GrafickiPrikazNekretninaComponent},
       {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
       {path: 'promenaLozinke', component: PromenaLozinkeComponent},
-      {path: 'pregledPoruka', component: PregledPorukaComponent},
-      {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent}
+      {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent},
+      {path: 'pregledPonuda', component: PregledPonudaComponent}
     ]
   },
   {
@@ -66,8 +66,8 @@ const routes: Routes = [
       {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
       {path: 'promenaLozinke', component: PromenaLozinkeComponent},
       {path: 'azuriranjeKorisnika', component: AzuriranjeKorisnikaComponent},
-      {path: 'pregledPoruka', component: PregledPorukaComponent},
-      {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent}
+      {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent},
+      {path: 'pregledPonuda', component: PregledPonudaComponent}
     ]
   },
 ];

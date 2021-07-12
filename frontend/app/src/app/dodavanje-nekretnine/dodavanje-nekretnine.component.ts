@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Korisnik } from '../models/korisnik';
 import { NekretninaService } from '../nekretnina.service';
@@ -11,7 +12,7 @@ import { NekretninaService } from '../nekretnina.service';
 })
 export class DodavanjeNekretnineComponent implements OnInit {
 
-  constructor(private http: HttpClient, private nekretninaService: NekretninaService, private router: Router) { }
+  constructor(private http: HttpClient, private nekretninaService: NekretninaService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.korisnik = JSON.parse(localStorage.getItem('ulogovan'));
@@ -40,10 +41,7 @@ export class DodavanjeNekretnineComponent implements OnInit {
   dodajNekretninu() {
     if(!this.naziv || !this.adresa || !this.tipNekretnine || !this.brojSpratova || !this.povrsina || !this.brojSoba || 
         !this.namestena || !this.tipOglasa || !this.cena || this.galerija.length < 3) {
-      this.poruka = 'Unesite sve podatke!';
-      let toast = document.getElementById('snackbar');
-      toast.className = 'showRed';
-      setTimeout(function(){toast.className = toast.className.replace('showRed', ''); }, 3000);
+      this.prikaziSnackBar('Unesite sve podatke!');
     } else {
       if(this.korisnik.tip == 'radnik agencije') {
         this.vlasnik = 'Agencija';
@@ -60,10 +58,7 @@ export class DodavanjeNekretnineComponent implements OnInit {
       );
       this.nekretninaService.dodajNekretninu(this.naziv, this.adresa, this.opstina, this.grad, this.tipNekretnine, this.brojSpratova,
           this.sprat, this.povrsina, this.brojSoba, this.namestena, this.tipOglasa, this.cena, this.vlasnik, this.galerija).subscribe();
-      this.poruka = 'Nekretnina uspesno dodata.';
-      let toast = document.getElementById('snackbar');
-      toast.className = 'showGreen';
-      setTimeout(function(){toast.className = toast.className.replace('showGreen', ''); }, 3000);
+      this.prikaziSnackBar('Nekretnina uspesno dodata.');
     }
   }
 
@@ -79,6 +74,10 @@ export class DodavanjeNekretnineComponent implements OnInit {
       toast.className = 'showRed';
       setTimeout(function(){toast.className = toast.className.replace('showRed', ''); }, 3000);
     }
+  }
+
+  prikaziSnackBar(poruka: string) {
+    this.snackBar.open(poruka, '', {duration: 3000});
   }
 
 }

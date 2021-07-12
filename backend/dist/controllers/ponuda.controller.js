@@ -27,6 +27,36 @@ class PonudaController {
                 }
             });
         };
+        this.dohvatiPonude = (req, res) => {
+            let korisnickoIme = req.body.korisnickoIme;
+            ponuda_1.default.find({ 'vlasnik': korisnickoIme, 'pregledana': false }, (err, ponude) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(ponude);
+            });
+        };
+        this.prihvatiPonudu = (req, res) => {
+            let idP = req.body.idP;
+            ponuda_1.default.collection.updateOne({ 'idP': idP }, { $set: { 'pregledana': true, 'prihvacena': true } }, err => {
+                if (err)
+                    console.log(err);
+            });
+        };
+        this.odbijPonudu = (req, res) => {
+            let idP = req.body.idP;
+            ponuda_1.default.collection.updateOne({ 'idP': idP }, { $set: { 'pregledana': true, 'prihvacena': false } }, err => {
+                if (err)
+                    console.log(err);
+            });
+        };
+        this.odbijOstalePonude = (req, res) => {
+            let idN = req.body.idN;
+            ponuda_1.default.collection.updateMany({ 'idN': idN, 'pregledana': false }, { $set: { 'pregledana': true, 'prihvacena': false } }, err => {
+                if (err)
+                    console.log(err);
+            });
+        };
     }
 }
 exports.PonudaController = PonudaController;

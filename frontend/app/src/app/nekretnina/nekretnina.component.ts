@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DialogPorukaComponent } from '../dialog-poruka/dialog-poruka.component';
 import { Korisnik } from '../models/korisnik';
 import { Nekretnina } from '../models/nekretnina';
 import { NekretninaService } from '../nekretnina.service';
@@ -43,7 +42,7 @@ export class NekretninaComponent implements OnInit {
       this.prikaziSnackBar('Unesite ponudu!');
     else {
       let korisnik: Korisnik = JSON.parse(localStorage.getItem('ulogovan'));
-      this.ponudaService.dodajPonudu(this.ponuda, this.nekretnina.vlasnik, korisnik.korisnickoIme).subscribe();
+      this.ponudaService.dodajPonudu(this.nekretnina.idN, this.ponuda, this.nekretnina.vlasnik, korisnik.korisnickoIme).subscribe();
       this.prikaziSnackBar('Ponuda uspesno dodata!');
     }
   }
@@ -63,16 +62,6 @@ export class NekretninaComponent implements OnInit {
     } else if (korisnik.tip == 'administrator') {
       this.router.navigate(['administrator/azuriranjeNekretnine']);
     } 
-  }
-
-  otvoriDialog(): void {
-    let korisnik = JSON.parse(localStorage.getItem('ulogovan'));
-    const dialogRef = this.dialog.open(DialogPorukaComponent, {
-      width: '500px',
-      data: {nekretnina: this.nekretnina, korisnik: korisnik}
-    });
-
-    dialogRef.afterClosed().subscribe();
   }
 
   prikaziSnackBar(poruka) {

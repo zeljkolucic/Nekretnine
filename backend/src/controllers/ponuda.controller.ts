@@ -23,4 +23,33 @@ export class PonudaController {
         })
     }
 
+    dohvatiPonude = (req: express.Request, res: express.Response) => {
+        let korisnickoIme = req.body.korisnickoIme;
+        Ponuda.find({'vlasnik': korisnickoIme, 'pregledana': false}, (err, ponude) => {
+            if(err) console.log(err);
+            else res.json(ponude);
+        })
+    }
+
+    prihvatiPonudu = (req: express.Request, res: express.Response) => {
+        let idP = req.body.idP;
+        Ponuda.collection.updateOne({'idP': idP}, {$set: {'pregledana': true, 'prihvacena': true}}, err => {
+            if(err) console.log(err);
+        })
+    }
+
+    odbijPonudu = (req: express.Request, res: express.Response) => {
+        let idP = req.body.idP;
+        Ponuda.collection.updateOne({'idP': idP}, {$set: {'pregledana': true, 'prihvacena': false}}, err => {
+            if(err) console.log(err);
+        })
+    }
+
+    odbijOstalePonude = (req: express.Request, res: express.Response) => {
+        let idN = req.body.idN;
+        Ponuda.collection.updateMany({'idN': idN, 'pregledana': false}, {$set: {'pregledana': true, 'prihvacena': false}}, err => {
+            if(err) console.log(err);
+        })
+    }
+
 }

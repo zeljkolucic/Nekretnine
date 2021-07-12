@@ -131,28 +131,28 @@ export class NekretninaController {
     dohvatiBrojKucaKojeSeIzdaju = (req: express.Request, res: express.Response) => {
         Nekretnina.find({'tipNekretnine': 'kuca', 'tipOglasa': 'Izdavanje'}, (err, nekretnine) => {
             if(err) console.log(err);
-            else res.json(nekretnine.length);
+            else nekretnine != null ? res.json(nekretnine.length) : res.json(0);
         })
     }
 
     dohvatiBrojKucaKojeSeProdaju = (req: express.Request, res: express.Response) => {
         Nekretnina.find({'tipNekretnine': 'kuca', 'tipOglasa': 'Prodaja'}, (err, nekretnine) => {
             if(err) console.log(err);
-            else res.json(nekretnine);
+            else nekretnine != null ? res.json(nekretnine.length) : res.json(0);
         })
     }
 
     dohvatiBrojStanovaKojiSeIzdaju = (req: express.Request, res: express.Response) => {
         Nekretnina.find({'tipNekretnine': 'stan', 'tipOglasa': 'Izdavanje'}, (err, nekretnine) => {
             if(err) console.log(err);
-            else res.json(nekretnine);
+            else nekretnine != null ? res.json(nekretnine.length) : res.json(0);
         })
     }
 
     dohvatiBrojStanovaKojiSeProdaju = (req: express.Request, res: express.Response) => {
         Nekretnina.find({'tipNekretnine': 'stan', 'tipOglasa': 'Prodaja'}, (err, nekretnine) => {
             if(err) console.log(err);
-            else res.json(nekretnine);
+            else nekretnine != null ? res.json(nekretnine.length) : res.json(0);
         })
     }
 

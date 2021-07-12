@@ -32,7 +32,7 @@ export class PregledKorisnikaSistemaComponent implements OnInit {
 
   obrisi(korisnik: Korisnik) {
     this.korisnikService.ukloniKorisnika(korisnik.korisnickoIme).subscribe();
-    this.dohvatiSveKorisnike();
+    location.reload();
   }
 
 }

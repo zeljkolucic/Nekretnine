@@ -22,10 +22,9 @@ import { PregledKorisnikaSistemaComponent } from './pregled-korisnika-sistema/pr
 import { PregledNekretninaComponent } from './pregled-nekretnina/pregled-nekretnina.component';
 import { GrafickiPrikazNekretninaComponent } from './graficki-prikaz-nekretnina/graficki-prikaz-nekretnina.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DialogPorukaComponent } from './dialog-poruka/dialog-poruka.component';
-import { PregledPorukaComponent } from './pregled-poruka/pregled-poruka.component';
 import { ChartsModule } from 'ng2-charts';
 import { AzuriranjeNekretnineComponent } from './azuriranje-nekretnine/azuriranje-nekretnine.component';
+import { PregledPonudaComponent } from './pregled-ponuda/pregled-ponuda.component';
 
 @NgModule({
   declarations: [
@@ -44,9 +43,8 @@ import { AzuriranjeNekretnineComponent } from './azuriranje-nekretnine/azuriranj
     PregledKorisnikaSistemaComponent,
     PregledNekretninaComponent,
     GrafickiPrikazNekretninaComponent,
-    DialogPorukaComponent,
-    PregledPorukaComponent,
-    AzuriranjeNekretnineComponent
+    AzuriranjeNekretnineComponent,
+    PregledPonudaComponent
   ],
   imports: [
     BrowserModule,

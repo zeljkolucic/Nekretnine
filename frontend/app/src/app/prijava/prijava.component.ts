@@ -23,7 +23,7 @@ export class PrijavaComponent implements OnInit {
 
   prijava() {
     if(!this.korisnickoIme || !this.lozinka || !this.tip) {
-      this.otvoriSnackBar('Popunite preostala polja!');
+      this.prikaziSnackBar('Popunite preostala polja!');
     } else {
       this.korisnikService.prijava(this.korisnickoIme, this.lozinka, this.tip).subscribe((korisnik: Korisnik) => {
         if(korisnik) {
@@ -38,13 +38,13 @@ export class PrijavaComponent implements OnInit {
             this.router.navigate(['administrator']);
           }
         } else {
-          this.otvoriSnackBar('Pogresni pristupni podaci!');
+          this.prikaziSnackBar('Pogresni pristupni podaci!');
         }
       })
     }
   }
 
-  otvoriSnackBar(poruka) {
+  prikaziSnackBar(poruka) {
     this.snackBar.open(poruka, '', {duration: 3000});
   }
 

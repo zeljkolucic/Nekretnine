@@ -9,6 +9,9 @@ let Ponuda = new Schema({
     idP: {
         type: Number
     },
+    idN: {
+        type: Number
+    },
     cena: {
         type: Number
     },
@@ -17,6 +20,12 @@ let Ponuda = new Schema({
     },
     ponudjac: {
         type: String
+    },
+    pregledana: {
+        type: Boolean
+    },
+    prihvacena: {
+        type: Boolean
     }
 });
 exports.default = mongoose_1.default.model('Ponuda', Ponuda, 'ponude');

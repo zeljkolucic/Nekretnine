@@ -41,7 +41,7 @@
                 <mat-card-title>{{nekretnina.naziv}}</mat-card-title>    
                 <mat-card-content>
                     <a routerLink='nekretnina/{{nekretnina.idN}}' routerLinkActive="tipKorisnika() == 'registrovani korisnik' && !prikazGalerijeZaRegistrovanogKorisnika()">
-                        <img [src]='slucajnaSlika(nekretnina)' height='490px' width='734px'>
+                        <img src={{nekretnina.galerija[0]}} height='490px' width='734px'>
                     </a>
                 </mat-card-content>
                 <mat-card-content>{{nekretnina.grad}}, {{nekretnina.opstina}}</mat-card-content>

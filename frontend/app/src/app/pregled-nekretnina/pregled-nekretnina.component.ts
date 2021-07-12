@@ -95,26 +95,22 @@ export class PregledNekretninaComponent implements OnInit {
 
   odobri(nekretnina: Nekretnina) {
     this.nekretninaService.odobriNekretninu(nekretnina.idN).subscribe();
-    this.dohvatiNekretnine();
+    location.reload();
   }
 
   promovisi(nekretnina: Nekretnina) {
     this.nekretninaService.promovisiNekretninu(nekretnina.idN).subscribe();
-    this.dohvatiNekretnine();
+    location.reload();
   }
 
   ukloniIzPromovisanih(nekretnina: Nekretnina) {
     this.nekretninaService.ukloniIzPromovisanih(nekretnina.idN).subscribe();
-    this.dohvatiNekretnine();
-  }
-
-  slucajnaSlika(nekretnina: Nekretnina): string {
-    return nekretnina.galerija[1];
+    location.reload();
   }
 
   pretrazi() {
     if(!this.naziv && !this.grad && !this.cenaOd && !this.cenaDo) {
-      this.otvoriSnackBar('Unesite barem jedan od parametara!');
+      this.prikaziSnackBar('Unesite barem jedan od parametara!');
     } else {
       this.nekretninaService.pretraziNekretnine(this.naziv, this.grad, this.cenaOd, this.cenaDo).subscribe((nekretnine: Nekretnina[]) => {
         this.nekretnine = nekretnine;
@@ -122,7 +118,7 @@ export class PregledNekretninaComponent implements OnInit {
     }
   }
 
-  otvoriSnackBar(poruka) {
+  prikaziSnackBar(poruka) {
     this.snackBar.open(poruka, '', {duration: 3000});
   }
 

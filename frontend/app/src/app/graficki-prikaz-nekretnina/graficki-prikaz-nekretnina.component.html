@@ -6,12 +6,8 @@
     <canvas baseChart  [datasets]='barChartData2' [labels]='barChartLabels2' [options]='barChartOptions' [legend]='barChartLegend' [type]='barChartType'>
     </canvas>
 
-    <canvas baseChart  [datasets]='barChartData3' [labels]='barChartLabels3' [options]='barChartOptions' [legend]='barChartLegend' [type]='barChartType'>
-    </canvas>
-
-    <canvas baseChart  [datasets]='barChartData4' [labels]='barChartLabels4' [options]='barChartOptions' [legend]='barChartLegend' [type]='barChartType'>
-    </canvas>
-
-    <canvas baseChart  [datasets]='barChartData5' [labels]='barChartLabels5' [options]='barChartOptions' [legend]='barChartLegend' [type]='barChartType'>
-    </canvas>
+    <div *ngIf='barChartData3.length != 0'>
+        <canvas baseChart  [datasets]='barChartData3' [labels]='barChartLabels3' [options]='barChartOptions' [legend]='barChartLegend' [type]='barChartType'>
+        </canvas>
+    </div>
 </div>

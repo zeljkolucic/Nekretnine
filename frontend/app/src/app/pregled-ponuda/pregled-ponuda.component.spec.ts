@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogPorukaComponent } from './dialog-poruka.component';
+import { PregledPonudaComponent } from './pregled-ponuda.component';
 
-describe('DialogPorukaComponent', () => {
-  let component: DialogPorukaComponent;
-  let fixture: ComponentFixture<DialogPorukaComponent>;
+describe('PregledPonudaComponent', () => {
+  let component: PregledPonudaComponent;
+  let fixture: ComponentFixture<PregledPonudaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogPorukaComponent ]
+      declarations: [ PregledPonudaComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogPorukaComponent);
+    fixture = TestBed.createComponent(PregledPonudaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

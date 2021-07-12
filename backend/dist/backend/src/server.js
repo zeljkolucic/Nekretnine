@@ -16,7 +16,7 @@ const sanduce_routes_1 = __importDefault(require("./routes/sanduce.routes"));
 const app = express_1.default();
 app.use(cors_1.default());
 app.use(body_parser_1.default.json());
-mongoose_1.default.connect("mongodb://localhost:27017/nekretnine2021", { useNewUrlParser: true });
+mongoose_1.default.connect("mongodb://localhost:27017/nekretnine2021");
 const conn = mongoose_1.default.connection;
 conn.once('open', () => {
     console.log("Konekcija sa bazom je uspesna");

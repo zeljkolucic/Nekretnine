@@ -1,4 +1,4 @@
-<div class='carousel'>
+<div class='carousel' *ngIf='nekretnina != null'>
     <ngb-carousel>
         <ng-template ngbSlide *ngFor="let slika of nekretnina.galerija">
             <div class="picsum-img-wrapper">
@@ -13,7 +13,7 @@
         </ng-template>
     </ngb-carousel>
 </div>
-<div id='podaciIKontakt'>
+<div id='podaciIKontakt' *ngIf='nekretnina != null'>
     <div>
         <h1>{{nekretnina.naziv}}</h1>
         <table>
@@ -83,10 +83,7 @@
         </div>
        
     </div>
-
-    <div id='kontakt' *ngIf='!mojaNekretnina()'>
-        <button mat-raised-button color='primary' class='matFormField' (click)='otvoriDialog()'>Kontakt</button>
-    </div>
+    
     <div *ngIf='mojaNekretnina()'>
         <button mat-raised-button color='primary' class='matFormField' (click)='azuriraj()'>Azuriraj</button>
     </div>

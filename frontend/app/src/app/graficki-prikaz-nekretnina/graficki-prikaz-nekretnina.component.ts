@@ -26,23 +26,18 @@ export class GrafickiPrikazNekretninaComponent implements OnInit {
   public barChartLabels3 = [];
   public barChartData3 = [];
 
-  public barChartLabels4 = [];
-  public barChartData4 = [];
-
-  public barChartLabels5 = [];
-  public barChartData5 = [];
-
   constructor(private nekretninaService: NekretninaService) { }
 
   ngOnInit(): void {
     this.dohvatiSveNekretnine();
-    //this.brojKucaKojeSeIzdaju();
-    //this.brojKucaKojeSeProdaju();
-    //this.brojStanovaKojiSeIzdaju();
-    //this.brojStanovaKojiSeProdaju();
+    this.brojKucaKojeSeIzdaju();
+    this.brojKucaKojeSeProdaju();
+    this.brojStanovaKojiSeIzdaju();
+    this.brojStanovaKojiSeProdaju();
   }
 
   nekretnine: Nekretnina[];
+  data1: number[] = [];
 
   dohvatiSveNekretnine() {
     this.nekretninaService.dohvatiSveNekretnine().subscribe((nekretnine: Nekretnina[]) => {
@@ -59,30 +54,31 @@ export class GrafickiPrikazNekretninaComponent implements OnInit {
     for(let i = 0; i < this.nekretnine.length; i++) {
       if(!gradovi.includes(this.nekretnine[i].grad)) {
         gradovi.push(this.nekretnine[i].grad);
-        let brojNekretninaUGradu: number;
         this.nekretninaService.dohvatiBrojNekretninaUGradu(this.nekretnine[i].grad).subscribe((broj: number) => {
-          brojNekretninaUGradu = broj;
+          
         })
-        brojNekretninaPoGradovima.push(brojNekretninaUGradu);
       }
     }
-    let data = {
-      data: brojNekretninaPoGradovima,
-      label: "Broj nekretnina po gradovima"
+    this.barChartLabels1 = gradovi;
+    let d = {
+      data: this.data1,
+      label: "Broj nekretnina po gradovima",
+      backgroundColor: ['blue']
     }
-    this.barChartData1.push(data);
+    this.barChartData1.push(d);
   }
 
   brojKucaKojeSeIzdaju() {
-    let brojKucaKojeSeIzdaju: number = 0;
+    let brojKucaKojeSeIzdaju: number[] = [];
     this.nekretninaService.dohvatiBrojKucaKojeSeIzdaju().subscribe((broj: number) => {
-      brojKucaKojeSeIzdaju = broj;
+      brojKucaKojeSeIzdaju.push(broj);
     })
-    let data = {
+    let data2 = {
       data: brojKucaKojeSeIzdaju,
-      label: "Broj kuca koje se izdaju"
+      label: "Broj kuca koje se izdaju",
+      backgroundColor: ['blue']
     }
-    this.barChartData2.push(data);
+    this.barChartData2.push(data2);
   }
 
   brojKucaKojeSeProdaju() {
@@ -90,35 +86,42 @@ export class GrafickiPrikazNekretninaComponent implements OnInit {
     this.nekretninaService.dohvatiBrojKucaKojeSeProdaju().subscribe((broj: number) => {
       brojKucaKojeSeProdaju = broj;
     })
-    let data = {
+    let data3 = {
       data: brojKucaKojeSeProdaju,
-      label: "Broj kuca koje se prodaju"
+      label: "Broj kuca koje se prodaju",
+      backgroundColor: ['blue']
     }
-    this.barChartData3.push(data);
+    this.barChartData2.push(data3);
   }
 
   brojStanovaKojiSeIzdaju() {
-    let brojStanovaKojiSeIzdaju: number = 0;
+    let brojStanovaKojiSeIzdaju: number[] = [];
     this.nekretninaService.dohvatiBrojStanovaKojiSeIzdaju().subscribe((broj: number) => {
-      brojStanovaKojiSeIzdaju = broj;
+      brojStanovaKojiSeIzdaju.push(broj);
+      console.log(brojStanovaKojiSeIzdaju[0]);
+      let data4 = {
+        data: brojStanovaKojiSeIzdaju,
+        label: "Broj stanova koji se izdaju",
+        backgroundColor: ['blue']
+      }
+      this.barChartData3.push(data4);
+      console.log(this.barChartData3[0].data[0]);
     })
-    let data = {
-      data: brojStanovaKojiSeIzdaju,
-      label: "Broj stanova koji se izdaju"
-    }
-    this.barChartData4.push(data);
+    
   }
 
   brojStanovaKojiSeProdaju() {
-    let brojStanovaKojiSeProdaju: number = 0;
+    let brojStanovaKojiSeProdaju: number[] = [];
     this.nekretninaService.dohvatiBrojStanovaKojiSeProdaju().subscribe((broj: number) => {
-      brojStanovaKojiSeProdaju = broj;
+      brojStanovaKojiSeProdaju.push(broj);
+      let data5 = {
+        data: brojStanovaKojiSeProdaju,
+        label: "Broj stanova koji se prodaju",
+        backgroundColor: ['blue']
+      }
+      this.barChartData3.push(data5);
     })
-    let data = {
-      data: brojStanovaKojiSeProdaju,
-      label: "Broj stanova koji se izdaju"
-    }
-    this.barChartData5.push(data);
+    
   }
 
 }
