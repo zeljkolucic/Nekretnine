@@ -13,15 +13,11 @@ export class AppComponent {
   constructor(public korisnikService: KorisnikService) {}
 
   ngOnInit(): void {
-    this.loginStatus$ = this.korisnikService.jeUlogovan;
-    this.korisnickoIme$ = this.korisnikService.trenutnoKorisnickoIme;
-    this.tipKorisnika$ = this.korisnikService.trenutniTipKorisnika;
+
   }
 
-  private isLoggedInSubscription: Subscription;
-
-  loginStatus$ : Observable<boolean>;
-  korisnickoIme$ : Observable<string>;
-  tipKorisnika$: Observable<string>;
+  ngOnDestroy(): void {
+    localStorage.clear();
+  }
 
 }

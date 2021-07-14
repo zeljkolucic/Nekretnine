@@ -9,25 +9,11 @@ import { Korisnik } from './models/korisnik';
 export class KorisnikService {
 
   constructor(private http: HttpClient) {
-    this.subject.next(localStorage.getItem('ulogovan') !== null);
+    
   }
 
-  private loginStatus = new BehaviorSubject<boolean>(this.proveriLoginStatus());
-  private korisnickoIme = new BehaviorSubject<string>(this.dohvatiKorisnickoIme());
-  private tipKorisnika = new BehaviorSubject<string>(this.dohvatiTipKorisnika());
-
-  public subject = new BehaviorSubject<boolean>(false);
-  public ulogovan: boolean = false;
 
   uri = 'http://localhost:4000';
-
-  postaviLoginStatus(vrednost: boolean) {
-    this.loginStatus.next(vrednost);
-  }
-
-  proveriLoginStatus(): boolean {
-    return false;
-  }
 
   dohvatiKorisnickoIme(): string {
     let korisnik: Korisnik = JSON.parse(localStorage.getItem('ulogovan'));
@@ -45,18 +31,6 @@ export class KorisnikService {
     } else {
       return null;
     }
-  }
-
-  get jeUlogovan() {
-    return this.loginStatus.asObservable();
-  }
-
-  get trenutnoKorisnickoIme() {
-    return this.korisnickoIme.asObservable();
-  }
-
-  get trenutniTipKorisnika() {
-    return this.tipKorisnika.asObservable();
   }
 
   prijava(korisnickoIme, lozinka, tip) {
@@ -109,11 +83,10 @@ export class KorisnikService {
     return this.http.post(`${this.uri}/korisnik/promeniLozinku`, podaci);
   }
 
-  azurirajKorisnika(staroKorisnickoIme, novoKorisnickoIme, lozinka, ime, prezime, slika, adresa, gradDrzava) {
+  azurirajKorisnika(staroKorisnickoIme, novoKorisnickoIme, ime, prezime, slika, adresa, gradDrzava) {
     const podaci = {
       staroKorisnickoIme: staroKorisnickoIme,
       novoKorisnickoIme: novoKorisnickoIme,
-      lozinka: lozinka, 
       ime: ime,
       prezime: prezime,
       slika: slika,

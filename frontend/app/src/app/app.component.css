@@ -4,6 +4,7 @@ body {
 }
 
 .navbar {
+    width: 100%;
     justify-content: space-between;
 }
 
@@ -12,6 +13,7 @@ span {
 }
 
 .content {
+    width: 100%;
     display: flex;
     justify-content: center;
 }

@@ -36,8 +36,6 @@ export class DodavanjeNekretnineComponent implements OnInit {
 
   korisnik: Korisnik;
 
-  poruka: string;
-
   dodajNekretninu() {
     if(!this.naziv || !this.adresa || !this.tipNekretnine || !this.brojSpratova || !this.povrsina || !this.brojSoba || 
         !this.namestena || !this.tipOglasa || !this.cena || this.galerija.length < 3) {
@@ -69,7 +67,7 @@ export class DodavanjeNekretnineComponent implements OnInit {
         this.galerija[i] = '../assets/' + event.target.files[i].name;
       }
     } else {
-      this.poruka = 'Izaberite barem 3 slike!';
+      this.prikaziSnackBar('Izaberite barem 3 slike!');
       let toast = document.getElementById('snackbar');
       toast.className = 'showRed';
       setTimeout(function(){toast.className = toast.className.replace('showRed', ''); }, 3000);

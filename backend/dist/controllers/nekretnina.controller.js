@@ -132,47 +132,6 @@ class NekretninaController {
                     res.json(nekretnine);
             });
         };
-        this.dohvatiBrojNekretninaUGradu = (req, res) => {
-            let grad = req.body.grad;
-            nekretnina_1.default.find({ 'grad': grad }, (err, nekretnine) => {
-                if (err)
-                    console.log(err);
-                else
-                    res.json(nekretnine.length);
-            });
-        };
-        this.dohvatiBrojKucaKojeSeIzdaju = (req, res) => {
-            nekretnina_1.default.find({ 'tipNekretnine': 'kuca', 'tipOglasa': 'Izdavanje' }, (err, nekretnine) => {
-                if (err)
-                    console.log(err);
-                else
-                    nekretnine != null ? res.json(nekretnine.length) : res.json(0);
-            });
-        };
-        this.dohvatiBrojKucaKojeSeProdaju = (req, res) => {
-            nekretnina_1.default.find({ 'tipNekretnine': 'kuca', 'tipOglasa': 'Prodaja' }, (err, nekretnine) => {
-                if (err)
-                    console.log(err);
-                else
-                    nekretnine != null ? res.json(nekretnine.length) : res.json(0);
-            });
-        };
-        this.dohvatiBrojStanovaKojiSeIzdaju = (req, res) => {
-            nekretnina_1.default.find({ 'tipNekretnine': 'stan', 'tipOglasa': 'Izdavanje' }, (err, nekretnine) => {
-                if (err)
-                    console.log(err);
-                else
-                    nekretnine != null ? res.json(nekretnine.length) : res.json(0);
-            });
-        };
-        this.dohvatiBrojStanovaKojiSeProdaju = (req, res) => {
-            nekretnina_1.default.find({ 'tipNekretnine': 'stan', 'tipOglasa': 'Prodaja' }, (err, nekretnine) => {
-                if (err)
-                    console.log(err);
-                else
-                    nekretnine != null ? res.json(nekretnine.length) : res.json(0);
-            });
-        };
     }
 }
 exports.NekretninaController = NekretninaController;

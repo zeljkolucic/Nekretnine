@@ -28,12 +28,12 @@ export class PregledZahtevaZaRegistracijuComponent implements OnInit {
   prihvati(zahtev: Zahtev) {
     this.korisnikService.dodajKorisnika(zahtev.ime, zahtev.prezime, zahtev.korisnickoIme, zahtev.lozinka, zahtev.slika, zahtev.adresa, zahtev.gradDrzava, '').subscribe();
     this.zahtevService.ukloniZahtev(zahtev).subscribe();
-    this.dohvatiSveZahteve();
+    location.reload();
   }
 
   odbij(zahtev: Zahtev) {
     this.zahtevService.ukloniZahtev(zahtev).subscribe();
-    this.dohvatiSveZahteve();
+    location.reload();
   }
 
 }

@@ -118,27 +118,4 @@ export class NekretninaService {
     return this.http.post(`${this.uri}/nekretnina/pretraziNekretnine`, podaci);
   }
 
-  dohvatiBrojNekretninaUGradu(grad: string) {
-    const podaci = {
-      grad: grad
-    }
-    return this.http.post(`${this.uri}/nekretnina/dohvatiBrojNekretninaUGradu`, podaci);
-  }
-
-  dohvatiBrojKucaKojeSeIzdaju() {
-    return this.http.get(`${this.uri}/nekretnina/dohvatiBrojKucaKojeSeIzdaju`);
-  }
-
-  dohvatiBrojKucaKojeSeProdaju() {
-    return this.http.get(`${this.uri}/nekretnina/dohvatiBrojKucaKojeSeProdaju`);
-  }
-
-  dohvatiBrojStanovaKojiSeIzdaju() {
-    return this.http.get(`${this.uri}/nekretnina/dohvatiBrojStanovaKojiSeIzdaju`);
-  }
-
-  dohvatiBrojStanovaKojiSeProdaju() {
-    return this.http.get(`${this.uri}/nekretnina/dohvatiBrojStanovaKojiSeProdaju`);
-  }
-
 }

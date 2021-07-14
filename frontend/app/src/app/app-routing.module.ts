@@ -16,12 +16,18 @@ import { GrafickiPrikazNekretninaComponent } from './graficki-prikaz-nekretnina/
 import { NekretninaComponent } from './nekretnina/nekretnina.component';
 import { AzuriranjeNekretnineComponent } from './azuriranje-nekretnine/azuriranje-nekretnine.component';
 import { PregledPonudaComponent } from './pregled-ponuda/pregled-ponuda.component';
+import { ProcenatAgencijeComponent } from './procenat-agencije/procenat-agencije.component';
+import { UgovoreneProdajeComponent } from './ugovorene-prodaje/ugovorene-prodaje.component';
+import { AdminGuard } from './admin.guard';
+import { RadnikAgencijeGuard } from './radnik-agencije.guard';
+import { RegistrovaniKorisnikGuard } from './registrovani-korisnik.guard';
+import { NeulogovanKorisnikGuard } from './neulogovan-korisnik.guard';
 
 const routes: Routes = [
   {path: '', component: PregledNekretninaComponent},
-  {path: 'prijava', component: PrijavaComponent},
-  {path: 'registracija', component: RegistracijaComponent},
-  {path: 'pregledNekretnina', component: PregledNekretninaComponent},
+  {path: 'prijava', component: PrijavaComponent, canActivate: [NeulogovanKorisnikGuard]},
+  {path: 'registracija', component: RegistracijaComponent, canActivate: [NeulogovanKorisnikGuard]},
+  {path: 'pregledNekretnina', component: PregledNekretninaComponent, canActivate: [NeulogovanKorisnikGuard]},
   {
     path: 'registrovaniKorisnik', 
     component: RegistrovaniKorisnikComponent,
@@ -38,7 +44,8 @@ const routes: Routes = [
       },
       {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent},
       {path: 'pregledPonuda', component: PregledPonudaComponent}
-    ]
+    ],
+    canActivate: [RegistrovaniKorisnikGuard]
   },
   {
     path: 'radnikAgencije', 
@@ -50,8 +57,10 @@ const routes: Routes = [
       {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
       {path: 'promenaLozinke', component: PromenaLozinkeComponent},
       {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent},
-      {path: 'pregledPonuda', component: PregledPonudaComponent}
-    ]
+      {path: 'pregledPonuda', component: PregledPonudaComponent},
+      {path: 'ugovoreneProdaje', component: UgovoreneProdajeComponent}
+    ],
+    canActivate: [RadnikAgencijeGuard]
   },
   {
     path: 'administrator', 
@@ -67,8 +76,11 @@ const routes: Routes = [
       {path: 'promenaLozinke', component: PromenaLozinkeComponent},
       {path: 'azuriranjeKorisnika', component: AzuriranjeKorisnikaComponent},
       {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent},
-      {path: 'pregledPonuda', component: PregledPonudaComponent}
-    ]
+      {path: 'pregledPonuda', component: PregledPonudaComponent},
+      {path: 'procenatAgencije', component: ProcenatAgencijeComponent},
+      {path: 'ugovoreneProdaje', component: UgovoreneProdajeComponent}
+    ],
+    canActivate: [AdminGuard]
   },
 ];
 

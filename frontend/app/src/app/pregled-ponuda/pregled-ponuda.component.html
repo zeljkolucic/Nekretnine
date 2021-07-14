@@ -3,7 +3,7 @@
 
         <ng-container matColumnDef="nekretnina">
             <th mat-header-cell *matHeaderCellDef>Nekretnina</th>
-            <td mat-cell *matCellDef="let ponuda">{{dohvatiNekretninuPoId(ponuda.idN)}}</td>
+            <td mat-cell *matCellDef="let ponuda">{{ponuda.nazivNekretnine}}</td>
         </ng-container>
     
         <ng-container matColumnDef="cena">

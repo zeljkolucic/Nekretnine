@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Nekretnina from './nekretnina';
 
 const Schema = mongoose.Schema;
 
@@ -11,6 +10,9 @@ let Ponuda = new Schema(
         idN: {
             type: Number
         },
+        nazivNekretnine: {
+            type: String
+        },
         cena: {
             type: Number
         },
@@ -19,6 +21,17 @@ let Ponuda = new Schema(
         }, 
         ponudjac: {
             type: String
+        },
+        tipOglasa: {
+            type: String
+        },
+        datumOd: {
+            type: String,
+            required: false
+        },
+        datumDo: {
+            type: String,
+            required: false
         },
         pregledana: {
             type: Boolean

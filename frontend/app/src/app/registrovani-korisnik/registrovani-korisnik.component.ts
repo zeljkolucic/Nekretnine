@@ -16,7 +16,6 @@ export class RegistrovaniKorisnikComponent implements OnInit {
 
   odjaviSe() {
     localStorage.removeItem('ulogovan');
-    this.korisnikService.postaviLoginStatus(false);
     this.router.navigate(['']);
   }
 

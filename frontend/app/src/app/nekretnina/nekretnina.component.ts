@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -30,6 +31,10 @@ export class NekretninaComponent implements OnInit {
   nekretnina: Nekretnina;
   ponuda: number;
   nacinPlacanja: string;
+  datumi = new FormGroup({
+    pocetak: new FormControl(),
+    kraj: new FormControl()
+  });
 
   dohvatiNekretninuPoId(idN) {
     this.nekretninaService.dohvatiNekretninuPoId(idN).subscribe((nekretnina: Nekretnina) => {
@@ -38,12 +43,34 @@ export class NekretninaComponent implements OnInit {
   }
 
   ponudi() {
-    if(!this.ponuda)
+    if(!this.ponuda || (this.nekretnina.tipOglasa == 'Izdavanje' && !this.datumi.value['pocetak'] && !this.datumi.value['kraj']))
       this.prikaziSnackBar('Unesite ponudu!');
     else {
       let korisnik: Korisnik = JSON.parse(localStorage.getItem('ulogovan'));
-      this.ponudaService.dodajPonudu(this.nekretnina.idN, this.ponuda, this.nekretnina.vlasnik, korisnik.korisnickoIme).subscribe();
-      this.prikaziSnackBar('Ponuda uspesno dodata!');
+      if(this.nekretnina.tipOglasa == 'Prodaja') {
+        this.ponudaService.proveriDaLiJeProdata(this.nekretnina.idN).subscribe(res => {
+          if(res['poruka'] == 'prodata') {
+            this.prikaziSnackBar('Nekretnina je prodata!');
+          } else if(res['poruka'] == 'dostupna') {
+            this.ponudaService.dodajPonudu(this.nekretnina.idN, this.nekretnina.naziv, this.ponuda, 
+            this.nekretnina.vlasnik, korisnik.korisnickoIme, this.nekretnina.tipOglasa).subscribe();
+            this.prikaziSnackBar('Ponuda uspesno dodata!');
+          }
+        })
+      } else if(this.nekretnina.tipOglasa == 'Izdavanje') {
+        let datumOd = this.datumi.value['pocetak'].toISOString().substring(0, 10);
+        let datumDo = this.datumi.value['kraj'].toISOString().substring(0, 10);
+        console.log(datumDo);
+        this.ponudaService.proveriDostupnost(this.nekretnina.idN, datumOd, datumDo).subscribe((res) => {
+          if(res['poruka'] == 'nedostupna') {
+            this.prikaziSnackBar('Nekretnina je zauzeta u tom periodu!');
+          } else {
+            this.ponudaService.dodajPonuduZaIznajmljivanje(this.nekretnina.idN, this.nekretnina.naziv, this.ponuda, 
+              this.nekretnina.vlasnik, korisnik.korisnickoIme, this.nekretnina.tipOglasa, datumOd, datumDo).subscribe();
+              this.prikaziSnackBar('Ponuda uspesno dodata!');
+          }
+        });
+      }   
     }
   }
 

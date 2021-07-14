@@ -119,41 +119,5 @@ export class NekretninaController {
             else res.json(nekretnine);
         })
     }
-
-    dohvatiBrojNekretninaUGradu = (req: express.Request, res: express.Response) => {
-        let grad = req.body.grad;
-        Nekretnina.find({'grad': grad}, (err, nekretnine) => {
-            if(err) console.log(err);
-            else res.json(nekretnine.length);
-        })
-    }
-
-    dohvatiBrojKucaKojeSeIzdaju = (req: express.Request, res: express.Response) => {
-        Nekretnina.find({'tipNekretnine': 'kuca', 'tipOglasa': 'Izdavanje'}, (err, nekretnine) => {
-            if(err) console.log(err);
-            else nekretnine != null ? res.json(nekretnine.length) : res.json(0);
-        })
-    }
-
-    dohvatiBrojKucaKojeSeProdaju = (req: express.Request, res: express.Response) => {
-        Nekretnina.find({'tipNekretnine': 'kuca', 'tipOglasa': 'Prodaja'}, (err, nekretnine) => {
-            if(err) console.log(err);
-            else nekretnine != null ? res.json(nekretnine.length) : res.json(0);
-        })
-    }
-
-    dohvatiBrojStanovaKojiSeIzdaju = (req: express.Request, res: express.Response) => {
-        Nekretnina.find({'tipNekretnine': 'stan', 'tipOglasa': 'Izdavanje'}, (err, nekretnine) => {
-            if(err) console.log(err);
-            else nekretnine != null ? res.json(nekretnine.length) : res.json(0);
-        })
-    }
-
-    dohvatiBrojStanovaKojiSeProdaju = (req: express.Request, res: express.Response) => {
-        Nekretnina.find({'tipNekretnine': 'stan', 'tipOglasa': 'Prodaja'}, (err, nekretnine) => {
-            if(err) console.log(err);
-            else nekretnine != null ? res.json(nekretnine.length) : res.json(0);
-        })
-    }
-
+    
 }

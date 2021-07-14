@@ -12,6 +12,7 @@ const zahtev_routes_1 = __importDefault(require("./routes/zahtev.routes"));
 const nekretnina_routes_1 = __importDefault(require("./routes/nekretnina.routes"));
 const multer_1 = __importDefault(require("multer"));
 const ponuda_routes_1 = __importDefault(require("./routes/ponuda.routes"));
+const procenat_routes_1 = __importDefault(require("./routes/procenat.routes"));
 const app = express_1.default();
 app.use(cors_1.default());
 app.use(body_parser_1.default.json());
@@ -25,6 +26,7 @@ router.use('/korisnik', korisnik_routes_1.default);
 router.use('/zahtev', zahtev_routes_1.default);
 router.use('/nekretnina', nekretnina_routes_1.default);
 router.use('/ponuda', ponuda_routes_1.default);
+router.use('/procenat', procenat_routes_1.default);
 const storage = multer_1.default.diskStorage({
     destination: (req, file, callBack) => {
         callBack(null, '../frontend/app/src/assets');

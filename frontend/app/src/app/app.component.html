@@ -1,11 +1,3 @@
-<mat-toolbar class='navbar' color='primary'>
-  <div id='title'>Nekretnine</div>
-  <div *ngIf='!(loginStatus$ | async) as loginStatus'>
-    <a mat-button class='menuButton' *ngIf='loginStatus' routerLink='pregledNekretnina'>Nekretnine</a>
-    <a mat-button class='menuButton' *ngIf='loginStatus' routerLink='prijava'>Prijava</a>
-    <a mat-button class='menuButton' *ngIf='loginStatus' routerLink='registracija'>Registracija</a>
-  </div>
-</mat-toolbar>
 <div class='content'>
   <router-outlet></router-outlet>
 </div>

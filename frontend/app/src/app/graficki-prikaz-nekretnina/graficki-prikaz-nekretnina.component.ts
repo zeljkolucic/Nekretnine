@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Korisnik } from '../models/korisnik';
 import { Nekretnina } from '../models/nekretnina';
 import { NekretninaService } from '../nekretnina.service';
 
@@ -29,99 +30,104 @@ export class GrafickiPrikazNekretninaComponent implements OnInit {
   constructor(private nekretninaService: NekretninaService) { }
 
   ngOnInit(): void {
-    this.dohvatiSveNekretnine();
-    this.brojKucaKojeSeIzdaju();
-    this.brojKucaKojeSeProdaju();
-    this.brojStanovaKojiSeIzdaju();
-    this.brojStanovaKojiSeProdaju();
-  }
-
-  nekretnine: Nekretnina[];
-  data1: number[] = [];
-
-  dohvatiSveNekretnine() {
     this.nekretninaService.dohvatiSveNekretnine().subscribe((nekretnine: Nekretnina[]) => {
       if(nekretnine) {
-        this.nekretnine = nekretnine;
-        this.brojNekretninaUGradu();
+
+        this.barChartLabels1 = ['ispod 100 000', 'izmedju 100 000 i 250 000', 'preko 250 000'];
+
+        let brojNekretnina1 = 0;
+        let brojNekretnina2 = 0;
+        let brojNekretnina3 = 0;
+
+        for(let nekretnina of nekretnine) {
+          if(nekretnina.cena < 100000) {
+            brojNekretnina1++;
+          } else if(nekretnina.cena >= 100000 && nekretnina.cena < 250000) {
+            brojNekretnina2++;
+          } else {
+            brojNekretnina3++;
+          }
+        }
+
+        this.data1.push(brojNekretnina1);
+        this.data1.push(brojNekretnina2);
+        this.data1.push(brojNekretnina3);
+
+        let data1 = {
+          data: this.data1,
+          label: "Broj nekretnina",
+          backgroundColor: ['blue']
+        }
+
+        this.barChartData1.push(data1);
+
+
+        let gradovi: string[] = [];
+        let brojNekretninaPoGradovima: number[] = [];
+        for(let nekretnina of nekretnine) {
+          if(!gradovi.includes(nekretnina.grad)) {
+            gradovi.push(nekretnina.grad);
+            let brojNekretnina = 1;
+            brojNekretninaPoGradovima.push(brojNekretnina);
+          } else {
+            let i = gradovi.indexOf(nekretnina.grad);
+            brojNekretninaPoGradovima[i]++;
+          }
+        }
+
+        for(let i = 0; i < brojNekretninaPoGradovima.length; i++) {
+          this.data2.push(brojNekretninaPoGradovima[i]);
+        }
+
+        this.barChartLabels2 = gradovi;
+        let data2 = {
+          data: this.data2,
+          label: "Broj nekretnina",
+          backgroundColor: ['blue']
+        }
+
+        this.barChartData2.push(data2);
+
+
+
+        this.barChartLabels3 = ['Broj kuca koje se prodaju', 'Broj kuca koje se izdaju', 'Broj stanova koji se prodaju', 'Broj stanova koji se izdaju'];
+        
+        let brojKucaKojeSeProdaju = 0;
+        let brojKucaKojeSeIzdaju = 0;
+        let brojStanovaKojiSeProdaju = 0;
+        let brojStanovaKojiSeIzdaju = 0;
+
+        for(let nekretnina of nekretnine) {
+          if(nekretnina.tipNekretnine == 'kuca' && nekretnina.tipOglasa == 'Prodaja') {
+            brojKucaKojeSeProdaju++;
+          } else if(nekretnina.tipNekretnine == 'kuca' && nekretnina.tipOglasa == 'Izdavanje') {
+            brojKucaKojeSeIzdaju++;
+          } else if(nekretnina.tipNekretnine == 'stan' && nekretnina.tipOglasa == 'Prodaja') {
+            brojStanovaKojiSeProdaju++;
+          } else {
+            brojStanovaKojiSeIzdaju++;
+          }
+        }
+
+        this.data3.push(brojKucaKojeSeProdaju);
+        this.data3.push(brojKucaKojeSeIzdaju);
+        this.data3.push(brojStanovaKojiSeProdaju);
+        this.data3.push(brojStanovaKojiSeIzdaju);
+
+        let data3 = {
+          data: this.data3,
+          label: "Broj nekretnina",
+          backgroundColor: ['blue']
+        }
+
+        this.barChartData3.push(data3);
       }
     })
   }
 
-  brojNekretninaUGradu() {
-    let gradovi: string[] = [];
-    let brojNekretninaPoGradovima: number[] = [];
-    for(let i = 0; i < this.nekretnine.length; i++) {
-      if(!gradovi.includes(this.nekretnine[i].grad)) {
-        gradovi.push(this.nekretnine[i].grad);
-        this.nekretninaService.dohvatiBrojNekretninaUGradu(this.nekretnine[i].grad).subscribe((broj: number) => {
-          
-        })
-      }
-    }
-    this.barChartLabels1 = gradovi;
-    let d = {
-      data: this.data1,
-      label: "Broj nekretnina po gradovima",
-      backgroundColor: ['blue']
-    }
-    this.barChartData1.push(d);
-  }
+  data1: number[] = [];
+  data2: number[] = [];
+  data3: number[] = [];
 
-  brojKucaKojeSeIzdaju() {
-    let brojKucaKojeSeIzdaju: number[] = [];
-    this.nekretninaService.dohvatiBrojKucaKojeSeIzdaju().subscribe((broj: number) => {
-      brojKucaKojeSeIzdaju.push(broj);
-    })
-    let data2 = {
-      data: brojKucaKojeSeIzdaju,
-      label: "Broj kuca koje se izdaju",
-      backgroundColor: ['blue']
-    }
-    this.barChartData2.push(data2);
-  }
-
-  brojKucaKojeSeProdaju() {
-    let brojKucaKojeSeProdaju: number = 0;
-    this.nekretninaService.dohvatiBrojKucaKojeSeProdaju().subscribe((broj: number) => {
-      brojKucaKojeSeProdaju = broj;
-    })
-    let data3 = {
-      data: brojKucaKojeSeProdaju,
-      label: "Broj kuca koje se prodaju",
-      backgroundColor: ['blue']
-    }
-    this.barChartData2.push(data3);
-  }
-
-  brojStanovaKojiSeIzdaju() {
-    let brojStanovaKojiSeIzdaju: number[] = [];
-    this.nekretninaService.dohvatiBrojStanovaKojiSeIzdaju().subscribe((broj: number) => {
-      brojStanovaKojiSeIzdaju.push(broj);
-      console.log(brojStanovaKojiSeIzdaju[0]);
-      let data4 = {
-        data: brojStanovaKojiSeIzdaju,
-        label: "Broj stanova koji se izdaju",
-        backgroundColor: ['blue']
-      }
-      this.barChartData3.push(data4);
-      console.log(this.barChartData3[0].data[0]);
-    })
-    
-  }
-
-  brojStanovaKojiSeProdaju() {
-    let brojStanovaKojiSeProdaju: number[] = [];
-    this.nekretninaService.dohvatiBrojStanovaKojiSeProdaju().subscribe((broj: number) => {
-      brojStanovaKojiSeProdaju.push(broj);
-      let data5 = {
-        data: brojStanovaKojiSeProdaju,
-        label: "Broj stanova koji se prodaju",
-        backgroundColor: ['blue']
-      }
-      this.barChartData3.push(data5);
-    })
-    
-  }
 
 }

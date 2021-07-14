@@ -30,8 +30,9 @@ export class PregledPonudaComponent implements OnInit {
   }
 
   prihvatiPonudu(ponuda: Ponuda) {
-    this.ponudaService.prihvatiPonudu(ponuda.idP).subscribe();
-    this.ponudaService.odbijOstalePonude(ponuda.idN).subscribe();
+    this.ponudaService.prihvatiPonudu(ponuda.idP).subscribe( () =>
+      this.ponudaService.odbijOstalePonude(ponuda.idN).subscribe()
+    );
     location.reload();
   }
 

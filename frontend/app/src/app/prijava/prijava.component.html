@@ -1,3 +1,11 @@
+<mat-toolbar class='navbar' color='primary'>
+    <div id='title'>Nekretnine</div>
+    <div>
+      <button mat-button class='menuButton' (click)='idiNaNekretnine()'>Nekretnine</button>
+      <button mat-button class='menuButton' (click)='idiNaPrijavu()'>Prijava</button>
+      <button mat-button class='menuButton' (click)='idiNaRegistraciju()'>Registracija</button>
+    </div>
+  </mat-toolbar>
 <div class='prijava'>
     <table>
         <tr>
@@ -12,7 +20,7 @@
             <td>
                 <mat-form-field class='matFormField' appearance='outline'>
                     <mat-label>Lozinka</mat-label>
-                    <input matInput type='text' [(ngModel)]='lozinka'>
+                    <input matInput type='password' [(ngModel)]='lozinka'>
                 </mat-form-field>
             </td>
         </tr>

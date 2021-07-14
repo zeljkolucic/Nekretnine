@@ -19,7 +19,6 @@ export class AzuriranjeKorisnikaComponent implements OnInit {
     this.ime = this.korisnik.ime;
     this.prezime = this.korisnik.prezime;
     this.korisnickoIme = this.korisnik.korisnickoIme;
-    this.lozinka = this.korisnik.lozinka;
     this.adresa = this.korisnik.adresa;
     this.gradDrzava = this.korisnik.gradDrzava;
   }
@@ -29,13 +28,10 @@ export class AzuriranjeKorisnikaComponent implements OnInit {
   ime: string;
   prezime: string;
   korisnickoIme: string;
-  lozinka: string;
   slika: string;
   fajlSlika;
   adresa: string;
   gradDrzava: string;
-
-  poruka: string;
 
   azuriraj() {
     this.korisnikService.dohvatiKorisnika(this.korisnickoIme).subscribe((korisnik:Korisnik) => {
@@ -53,10 +49,14 @@ export class AzuriranjeKorisnikaComponent implements OnInit {
           (res) => this.slika = res,
           (err) => console.log(err)
         );
-        this.korisnikService.azurirajKorisnika(this.korisnik.korisnickoIme, this.korisnickoIme, this.lozinka, this.ime, 
+        this.korisnikService.azurirajKorisnika(this.korisnik.korisnickoIme, this.korisnickoIme, this.ime, 
             this.prezime, this.slika, this.adresa, this.gradDrzava).subscribe();
         localStorage.removeItem('korisnikZaAzuriranje');
-        this.router.navigate(['administrator']);
+        if(this.korisnik.tip == 'registrovani korisnik') {
+          this.router.navigate(['registrovaniKorisnik']);
+        } else {
+          this.router.navigate(['administrator']);
+        }
       }
     })
   }

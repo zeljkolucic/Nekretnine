@@ -57,6 +57,52 @@ class PonudaController {
                     console.log(err);
             });
         };
+        this.dohvatiUgovoreneProdaje = (req, res) => {
+            ponuda_1.default.find({ 'prihvacena': true }, (err, ugovoreneProdaje) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(ugovoreneProdaje);
+            });
+        };
+        this.proveriDostupnost = (req, res) => {
+            let idN = req.body.idN;
+            let datumOd = req.body.datumOd;
+            let datumDo = req.body.datumDo;
+            console.log(datumOd + ' ' + datumDo);
+            ponuda_1.default.find({ 'idN': idN, 'prihvacena': true, $or: [
+                    { 'datumOd': { $gte: datumOd, $lte: datumDo } },
+                    { 'datumDo': { $gte: datumOd, $lte: datumDo } },
+                    { $and: [{ 'datumOd': { $lte: datumOd }, 'datumDo': { $gte: datumDo } }] },
+                    { $and: [{ 'datumOd': { $gte: datumOd }, 'datumDo': { $lte: datumDo } }] }
+                ] }, (err, ponude) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (ponude.length != 0) {
+                        res.status(200).json({ 'poruka': 'nedostupna' });
+                    }
+                    else {
+                        res.status(200).json({ 'poruka': 'dostupna' });
+                    }
+                }
+            });
+        };
+        this.proveriDaLiJeProdata = (req, res) => {
+            let idN = req.body.idN;
+            ponuda_1.default.findOne({ 'idN': idN, 'prihvacena': true }, (err, ponuda) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (ponuda != null) {
+                        res.status(200).json({ 'poruka': 'prodata' });
+                    }
+                    else {
+                        res.status(200).json({ 'poruka': 'dostupna' });
+                    }
+                }
+            });
+        };
     }
 }
 exports.PonudaController = PonudaController;

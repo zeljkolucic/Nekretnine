@@ -51,24 +51,4 @@ nekretninaRouter.route('/pretraziNekretnine').post(
     (req, res) => new NekretninaController().pretraziNekretnine(req, res)
 )
 
-nekretninaRouter.route('/dohvatiBrojNekretninaUGradu').post (
-    (req, res) => new NekretninaController().dohvatiBrojNekretninaUGradu(req, res)
-)
-
-nekretninaRouter.route('/dohvatiBrojKucaKojeSeIzdaju').get(
-    (req, res) => new NekretninaController().dohvatiBrojKucaKojeSeIzdaju(req, res)
-)
-
-nekretninaRouter.route('/dohvatiBrojKucaKojeSeProdaju').get(
-    (req, res) => new NekretninaController().dohvatiBrojKucaKojeSeProdaju(req, res)
-)
-
-nekretninaRouter.route('/dohvatiBrojStanovaKojiSeIzdaju').get(
-    (req, res) => new NekretninaController().dohvatiBrojStanovaKojiSeIzdaju(req, res)
-)
-
-nekretninaRouter.route('/dohvatiBrojStanovaKojiSeProdaju').get(
-    (req, res) => new NekretninaController().dohvatiBrojStanovaKojiSeProdaju(req, res)
-)
-
 export default nekretninaRouter;

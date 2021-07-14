@@ -76,6 +76,17 @@
                 <mat-label>Iznos</mat-label>
                 <input matInput type='number' [(ngModel)]='ponuda'>
             </mat-form-field>
+            <div *ngIf="nekretnina.tipOglasa == 'Izdavanje'">
+                <mat-form-field appearance="outline">
+                    <mat-label>Unesite datume iznajmljivanja</mat-label>
+                    <mat-date-range-input [formGroup]="datumi" [rangePicker]="picker">
+                        <input matStartDate formControlName="pocetak" placeholder="Pocetak">
+                        <input matEndDate formControlName="kraj" placeholder="Kraj">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </div>
             <button mat-raised-button color='primary' class='matFormField' (click)='ponudi()'>Ponudi</button>
             <div *ngIf="nacinPlacanja == 'Kredit' && ponuda != null">
                 Ucesce: {{ponuda * 0.2}}

@@ -24,7 +24,6 @@ export class RadnikAgencijeComponent implements OnInit {
 
   odjaviSe() {
     localStorage.removeItem('ulogovan');
-    this.korisnikService.postaviLoginStatus(false);
     this.router.navigate(['']);
   }
 

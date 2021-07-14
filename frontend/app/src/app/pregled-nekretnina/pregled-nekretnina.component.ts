@@ -36,7 +36,6 @@ export class PregledNekretninaComponent implements OnInit {
     } else if(korisnik.tip == 'radnik agencije') {
       this.dohvatiSveNekretnine();
     } else if(korisnik.tip == 'registrovani korisnik') {
-      console.log(this.router.url);
       if(this.router.url === '/registrovaniKorisnik/pregledMojihNekretnina') {
         this.dohvatiMojeNekretnine(korisnik.korisnickoIme);
       } else {
@@ -120,6 +119,18 @@ export class PregledNekretninaComponent implements OnInit {
 
   prikaziSnackBar(poruka) {
     this.snackBar.open(poruka, '', {duration: 3000});
+  }
+
+  idiNaPrijavu() {
+    this.router.navigate(['prijava']);
+  }
+
+  idiNaNekretnine() {
+    this.router.navigate(['pregledNekretnina']);
+  }
+
+  idiNaRegistraciju() {
+    this.router.navigate(['registracija']);
   }
 
 }

@@ -23,4 +23,16 @@ ponudaRouter.route('/odbijOstalePonude').post(
     (req, res) => new PonudaController().odbijOstalePonude(req, res)
 )
 
+ponudaRouter.route('/dohvatiUgovoreneProdaje').get(
+    (req, res) => new PonudaController().dohvatiUgovoreneProdaje(req, res)
+)
+
+ponudaRouter.route('/proveriDostupnost').post(
+    (req, res) => new PonudaController().proveriDostupnost(req, res)
+)
+
+ponudaRouter.route('/proveriDaLiJeProdata').post(
+    (req, res) => new PonudaController().proveriDaLiJeProdata(req, res)
+)
+
 export default ponudaRouter;

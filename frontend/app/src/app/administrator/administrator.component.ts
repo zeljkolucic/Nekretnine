@@ -17,15 +17,10 @@ export class AdministratorComponent implements OnInit {
 
   ngOnDestroy(): void {
     localStorage.removeItem('ulogovan');
-    this.korisnikService.postaviLoginStatus(false);
   }
-
-  poruka: string;
 
   odjaviSe() {
     localStorage.removeItem('ulogovan');
-    this.korisnikService.ulogovan = false;
-    this.korisnikService.postaviLoginStatus(false);
     this.router.navigate(['']);
   }  
 

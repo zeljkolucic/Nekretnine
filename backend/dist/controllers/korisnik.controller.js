@@ -60,11 +60,10 @@ class KorisnikController {
             let novoKorisnickoIme = req.body.novoKorisnickoIme;
             let ime = req.body.ime;
             let prezime = req.body.prezime;
-            let lozinka = req.body.lozinka;
             let slika = req.body.slika;
             let adresa = req.body.adresa;
             let gradDrzava = req.body.gradDrzava;
-            korisnik_1.default.collection.updateOne({ 'korisnickoIme': staroKorisnickoIme }, { $set: { 'korisnickoIme': novoKorisnickoIme, 'lozinka': lozinka,
+            korisnik_1.default.collection.updateOne({ 'korisnickoIme': staroKorisnickoIme }, { $set: { 'korisnickoIme': novoKorisnickoIme,
                     'ime': ime, 'prezime': prezime, 'slika': slika, 'adresa': adresa, 'gradDrzava': gradDrzava } }, err => {
                 if (err)
                     console.log(err);

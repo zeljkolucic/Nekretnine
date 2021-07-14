@@ -25,6 +25,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { AzuriranjeNekretnineComponent } from './azuriranje-nekretnine/azuriranje-nekretnine.component';
 import { PregledPonudaComponent } from './pregled-ponuda/pregled-ponuda.component';
+import { ProcenatAgencijeComponent } from './procenat-agencije/procenat-agencije.component';
+import { UgovoreneProdajeComponent } from './ugovorene-prodaje/ugovorene-prodaje.component';
+import { ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import { PregledPonudaComponent } from './pregled-ponuda/pregled-ponuda.componen
     PregledNekretninaComponent,
     GrafickiPrikazNekretninaComponent,
     AzuriranjeNekretnineComponent,
-    PregledPonudaComponent
+    PregledPonudaComponent,
+    ProcenatAgencijeComponent,
+    UgovoreneProdajeComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,8 @@ import { PregledPonudaComponent } from './pregled-ponuda/pregled-ponuda.componen
     BrowserAnimationsModule,
     MaterialModule,
     NgbModule,
-    ChartsModule
+    ChartsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

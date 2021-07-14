@@ -28,8 +28,6 @@ export class PrijavaComponent implements OnInit {
       this.korisnikService.prijava(this.korisnickoIme, this.lozinka, this.tip).subscribe((korisnik: Korisnik) => {
         if(korisnik) {
           localStorage.setItem('ulogovan', JSON.stringify(korisnik));
-          this.korisnikService.subject.next(true);
-          this.korisnikService.postaviLoginStatus(true);
           if(korisnik.tip == 'registrovani korisnik') {
             this.router.navigate(['registrovaniKorisnik']);
           } else if(korisnik.tip == 'radnik agencije') {
@@ -46,6 +44,18 @@ export class PrijavaComponent implements OnInit {
 
   prikaziSnackBar(poruka) {
     this.snackBar.open(poruka, '', {duration: 3000});
+  }
+
+  idiNaPrijavu() {
+    this.router.navigate(['prijava']);
+  }
+
+  idiNaNekretnine() {
+    this.router.navigate(['pregledNekretnina']);
+  }
+
+  idiNaRegistraciju() {
+    this.router.navigate(['registracija']);
   }
 
 }

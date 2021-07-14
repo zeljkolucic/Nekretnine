@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { asLiteral } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { KorisnikService } from '../korisnik.service';
 import { Korisnik } from '../models/korisnik';
 import { ZahtevService } from '../zahtev.service';
@@ -13,7 +14,8 @@ import { ZahtevService } from '../zahtev.service';
 })
 export class RegistracijaComponent implements OnInit {
 
-  constructor(private http: HttpClient, private korisnikService: KorisnikService, private zahtevService: ZahtevService, private snackBar: MatSnackBar) { }
+  constructor(private http: HttpClient, private korisnikService: KorisnikService, private zahtevService: ZahtevService, 
+    private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -38,13 +40,10 @@ export class RegistracijaComponent implements OnInit {
           this.prikaziSnackBar('Korisnicko ime je zauzeto!');
         } else {
           let regexLozinka = /^(?!.*([A-Za-z0-9!@#$%^&*()_+{}[\]|\\\/?.,><:"';])\1{3})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}[\]|\\\/?.,><:"';])[A-Za-z\d!@#$%^&*()_+{}[\]|\\\/?.,><:"';]{8,24}$/;
-          let regexEmail = /^\w{4,}@\w+\.\w{2,3}$/;
           if(!regexLozinka.test(this.lozinka)) {
             this.prikaziSnackBar('Lozinka nije dovoljno jaka!');
           } else if(this.lozinka != this.potvrdaLozinke) {
             this.prikaziSnackBar('Lozinke se ne podudaraju!');
-          } else if(!regexEmail.test(this.adresa)) {
-            this.prikaziSnackBar('Email nije u odgovarajucem formatu!');
           } else {
             if(!this.slika) 
               this.slika = 'podrazumevano.png'; 
@@ -76,6 +75,18 @@ export class RegistracijaComponent implements OnInit {
 
   prikaziSnackBar(poruka) {
     this.snackBar.open(poruka, '', {duration: 3000});
+  }
+
+  idiNaPrijavu() {
+    this.router.navigate(['prijava']);
+  }
+
+  idiNaNekretnine() {
+    this.router.navigate(['pregledNekretnina']);
+  }
+
+  idiNaRegistraciju() {
+    this.router.navigate(['registracija']);
   }
 
 }

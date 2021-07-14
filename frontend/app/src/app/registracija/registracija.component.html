@@ -1,56 +1,65 @@
-<table class='registracija'>
-    <tr>
-        <td>
-            <mat-form-field class='matFormField' appearance='outline'>
-                <mat-label>Ime</mat-label>
-                <input matInput type='text' [(ngModel)]='ime'>
-            </mat-form-field>
-            <mat-form-field class='matFormField' appearance='outline'>
-                <mat-label>Prezime</mat-label>
-                <input matInput type='text' [(ngModel)]='prezime'>
-            </mat-form-field>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <mat-form-field class='matFormField2' appearance='outline'>
-                <mat-label>Korisnicko ime</mat-label>
-                <input matInput type='text' [(ngModel)]='korisnickoIme'>
-            </mat-form-field>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <mat-form-field class='matFormField' appearance='outline'>
-                <mat-label>Lozinka</mat-label>
-                <input matInput type='text' [(ngModel)]='lozinka'>
-            </mat-form-field><mat-form-field class='matFormField' appearance='outline'>
-                <mat-label>Potvrda lozinke</mat-label>
-                <input matInput type='text' [(ngModel)]='potvrdaLozinke'>
-            </mat-form-field>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <mat-form-field class='matFormField2' appearance='outline'>
-                <mat-label>Email</mat-label>
-                <input matInput type='text' [(ngModel)]='adresa'>
-            </mat-form-field>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <mat-form-field class='matFormField' appearance='outline'>
-                <mat-label>Grad i drzava stanovanja</mat-label>
-                <input matInput type='text' [(ngModel)]='gradDrzava'>
-            </mat-form-field>
-            <input type='file' name='slike' (change)='odaberiSlike($event)'>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <button mat-raised-button color='primary' class='matFormField2' (click)='registracija()'>Registracija</button>
-        </td>
-    </tr>
-</table>
-
+<mat-toolbar class='navbar' color='primary'>
+    <div id='title'>Nekretnine</div>
+    <div>
+        <button mat-button class='menuButton' (click)='idiNaNekretnine()'>Nekretnine</button>
+        <button mat-button class='menuButton' (click)='idiNaPrijavu()'>Prijava</button>
+        <button mat-button class='menuButton' (click)='idiNaRegistraciju()'>Registracija</button>
+    </div>
+  </mat-toolbar>
+<div class = 'registracija'>
+    <table>
+        <tr>
+            <td>
+                <mat-form-field class='matFormField' appearance='outline'>
+                    <mat-label>Ime</mat-label>
+                    <input matInput type='text' [(ngModel)]='ime'>
+                </mat-form-field>
+                <mat-form-field class='matFormField' appearance='outline'>
+                    <mat-label>Prezime</mat-label>
+                    <input matInput type='text' [(ngModel)]='prezime'>
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field class='matFormField2' appearance='outline'>
+                    <mat-label>Korisnicko ime</mat-label>
+                    <input matInput type='text' [(ngModel)]='korisnickoIme'>
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field class='matFormField' appearance='outline'>
+                    <mat-label>Lozinka</mat-label>
+                    <input matInput type='password' [(ngModel)]='lozinka'>
+                </mat-form-field><mat-form-field class='matFormField' appearance='outline'>
+                    <mat-label>Potvrda lozinke</mat-label>
+                    <input matInput type='password' [(ngModel)]='potvrdaLozinke'>
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field class='matFormField2' appearance='outline'>
+                    <mat-label>Email</mat-label>
+                    <input matInput type='text' [(ngModel)]='adresa'>
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field class='matFormField' appearance='outline'>
+                    <mat-label>Grad i drzava stanovanja</mat-label>
+                    <input matInput type='text' [(ngModel)]='gradDrzava'>
+                </mat-form-field>
+                <input type='file' name='slike' (change)='odaberiSlike($event)'>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button mat-raised-button color='primary' class='matFormField2' (click)='registracija()'>Registracija</button>
+            </td>
+        </tr>
+    </table>
+</div>

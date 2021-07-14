@@ -10,12 +10,30 @@ export class PonudaService {
 
   uri = 'http://localhost:4000';
 
-  dodajPonudu(idN, cena, vlasnik, ponudjac) {
+  dodajPonudu(idN, nazivNekretnine, cena, vlasnik, ponudjac, tipOglasa) {
     const podaci = {
       idN: idN,
+      nazivNekretnine: nazivNekretnine,
       cena: cena,
       vlasnik: vlasnik,
       ponudjac: ponudjac,
+      tipOglasa: tipOglasa,
+      pregledana: false,
+      prihvacena: false
+    }
+    return this.http.post(`${this.uri}/ponuda/dodajPonudu`, podaci);
+  }
+
+  dodajPonuduZaIznajmljivanje(idN, nazivNekretnine, cena, vlasnik, ponudjac, tipOglasa, datumOd, datumDo) {
+    const podaci = {
+      idN: idN,
+      nazivNekretnine: nazivNekretnine,
+      cena: cena,
+      vlasnik: vlasnik,
+      ponudjac: ponudjac,
+      tipOglasa: tipOglasa,
+      datumOd: datumOd,
+      datumDo: datumDo,
       pregledana: false,
       prihvacena: false
     }
@@ -50,5 +68,24 @@ export class PonudaService {
     return this.http.post(`${this.uri}/ponuda/odbijOstalePonude`, podaci);
   }
 
+  dohvatiUgovoreneProdaje() {
+    return this.http.get(`${this.uri}/ponuda/dohvatiUgovoreneProdaje`);
+  }
+
+  proveriDostupnost(idN, datumOd, datumDo) {
+    const podaci = {
+      idN: idN,
+      datumOd: datumOd,
+      datumDo: datumDo
+    }
+    return this.http.post(`${this.uri}/ponuda/proveriDostupnost`, podaci);
+  }
+
+  proveriDaLiJeProdata(idN) {
+    const podaci = {
+      idN: idN
+    }
+    return this.http.post(`${this.uri}/ponuda/proveriDaLiJeProdata`, podaci);
+  }
 
 }

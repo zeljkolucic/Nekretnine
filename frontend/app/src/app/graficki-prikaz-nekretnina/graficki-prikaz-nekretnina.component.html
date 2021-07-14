@@ -1,13 +1,17 @@
 <script src='node_modules/chart.js/src/chart.js'></script>
 <div style='display: block'>
-    <canvas baseChart  [datasets]='barChartData1' [labels]='barChartLabels1' [options]='barChartOptions' [legend]='barChartLegend' [type]='barChartType'>
-    </canvas>
+    <div class='chart'>
+        <canvas baseChart [datasets]='barChartData1' [labels]='barChartLabels1' [options]='barChartOptions' [legend]='barChartLegend' [type]='barChartType'>
+        </canvas>
+    </div>
 
-    <canvas baseChart  [datasets]='barChartData2' [labels]='barChartLabels2' [options]='barChartOptions' [legend]='barChartLegend' [type]='barChartType'>
-    </canvas>
+    <div class='chart'>
+        <canvas baseChart [datasets]='barChartData2' [labels]='barChartLabels2' [options]='barChartOptions' [legend]='barChartLegend' [type]='barChartType'>
+        </canvas>
+    </div>
 
-    <div *ngIf='barChartData3.length != 0'>
-        <canvas baseChart  [datasets]='barChartData3' [labels]='barChartLabels3' [options]='barChartOptions' [legend]='barChartLegend' [type]='barChartType'>
+    <div class='chart'>
+        <canvas baseChart [datasets]='barChartData3' [labels]='barChartLabels3' [options]='barChartOptions' [legend]='barChartLegend' [type]='barChartType'>
         </canvas>
     </div>
 </div>
