@@ -41,7 +41,7 @@ export class KorisnikController {
     }
 
     dohvatiSveKorisnike = (req: express.Request, res: express.Response) => {
-        Korisnik.find({'tip': 'registrovani korisnik'}, (err, korisnici) => {
+        Korisnik.find({$or: [{'tip': 'registrovani korisnik'}, {'tip': 'radnik agencije'}]}, (err, korisnici) => {
             if(err) console.log(err);
             else res.json(korisnici);
         })

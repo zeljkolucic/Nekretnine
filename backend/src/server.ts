@@ -39,18 +39,15 @@ let upload = multer({storage: storage});
 
 app.post('/file', upload.single('file'), (req, res, next) => {
     const file = req.file;
-    if(!file) {
-        const error = new Error('Dodajte fajl!');
-        return next(error);
+    if(file) {
+        res.send(file.filename)
     }
-    console.log(file.filename);
-    res.send(file.filename)
 })
 
 app.post('/files', upload.array('files'), (req, res, next) => {
     const files = req.files;
     if(!files) {
-        const error = new Error('Dodajte fajl!');
+        const error = new Error('Dodajte fajlove!');
         return next(error);
     }
     res.send(files)

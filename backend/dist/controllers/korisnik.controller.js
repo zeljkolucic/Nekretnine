@@ -48,7 +48,7 @@ class KorisnikController {
             });
         };
         this.dohvatiSveKorisnike = (req, res) => {
-            korisnik_1.default.find({ 'tip': 'registrovani korisnik' }, (err, korisnici) => {
+            korisnik_1.default.find({ $or: [{ 'tip': 'registrovani korisnik' }, { 'tip': 'radnik agencije' }] }, (err, korisnici) => {
                 if (err)
                     console.log(err);
                 else

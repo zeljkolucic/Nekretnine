@@ -133,4 +133,8 @@ export class PregledNekretninaComponent implements OnInit {
     this.router.navigate(['registracija']);
   }
 
+  ulogovanKorisnik(): boolean {
+    return localStorage.getItem('ulogovan') != null;
+  }
+
 }

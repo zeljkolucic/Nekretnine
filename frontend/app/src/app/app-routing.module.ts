@@ -43,7 +43,8 @@ const routes: Routes = [
         ]
       },
       {path: 'azuriranjeNekretnine', component: AzuriranjeNekretnineComponent},
-      {path: 'pregledPonuda', component: PregledPonudaComponent}
+      {path: 'pregledPonuda', component: PregledPonudaComponent},
+      {path: 'azuriranjeKorisnika', component: AzuriranjeKorisnikaComponent},
     ],
     canActivate: [RegistrovaniKorisnikGuard]
   },
@@ -52,7 +53,13 @@ const routes: Routes = [
     component: RadnikAgencijeComponent,
     children: [
       {path: '', component: GrafickiPrikazNekretninaComponent},
-      {path: 'pregledNekretnina', component: PregledNekretninaComponent},
+      {
+        path: 'pregledNekretnina', 
+        component: PregledNekretninaComponent,
+        children: [
+          {path: 'nekretnina/:idN', component: NekretninaComponent}
+        ]
+      },
       {path: 'grafickiPrikazNekretnina', component: GrafickiPrikazNekretninaComponent},
       {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},
       {path: 'promenaLozinke', component: PromenaLozinkeComponent},
@@ -66,10 +73,16 @@ const routes: Routes = [
     path: 'administrator', 
     component: AdministratorComponent,
     children: [
-      {path: '', component: PregledNekretninaComponent},
+      {path: '', component: GrafickiPrikazNekretninaComponent},
       {path: 'pregledZahtevaZaRegistraciju', component: PregledZahtevaZaRegistracijuComponent},
       {path: 'pregledKorisnikaSistema', component: PregledKorisnikaSistemaComponent},
-      {path: 'pregledNekretnina', component: PregledNekretninaComponent},
+      {
+        path: 'pregledNekretnina', 
+        component: PregledNekretninaComponent,
+        children: [
+          {path: 'nekretnina/:idN', component: NekretninaComponent}
+        ]
+      },
       {path: 'grafickiPrikazNekretnina', component: GrafickiPrikazNekretninaComponent},
       {path: 'dodavanjeNovogKorisnika', component: DodavanjeNovogKorisnikaComponent},
       {path: 'dodavanjeNekretnine', component: DodavanjeNekretnineComponent},

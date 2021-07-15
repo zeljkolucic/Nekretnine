@@ -35,12 +35,11 @@ export class AzuriranjeKorisnikaComponent implements OnInit {
 
   azuriraj() {
     this.korisnikService.dohvatiKorisnika(this.korisnickoIme).subscribe((korisnik:Korisnik) => {
-      if(korisnik.idK != this.korisnik.idK) {
+      if(korisnik && korisnik.idK != this.korisnik.idK) {
         this.prikaziSnackBar('Korisnicko ime je zauzeto!');
       } else {
         if(!this.slika) 
-            this.slika = 'podrazumevano.png'; 
-        this.slika = '../assets/' + this.slika;
+            this.slika = '../assets/podrazumevano.png'; 
         this.prikaziSnackBar('Korisnik uspesno azuriran!');
         const formData = new FormData();
         formData.append('file', this.fajlSlika);
@@ -50,8 +49,12 @@ export class AzuriranjeKorisnikaComponent implements OnInit {
           (err) => console.log(err)
         );
         this.korisnikService.azurirajKorisnika(this.korisnik.korisnickoIme, this.korisnickoIme, this.ime, 
-            this.prezime, this.slika, this.adresa, this.gradDrzava).subscribe();
-        localStorage.removeItem('korisnikZaAzuriranje');
+            this.prezime, this.slika, this.adresa, this.gradDrzava).subscribe( () =>
+              this.korisnikService.dohvatiKorisnika(this.korisnickoIme).subscribe((korisnik: Korisnik) => {
+                localStorage.setItem('ulogovan', JSON.stringify(korisnik));
+                localStorage.removeItem('korisnikZaAzuriranje');
+            })
+            );
         if(this.korisnik.tip == 'registrovani korisnik') {
           this.router.navigate(['registrovaniKorisnik']);
         } else {

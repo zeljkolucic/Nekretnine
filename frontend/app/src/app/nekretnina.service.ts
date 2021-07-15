@@ -61,8 +61,7 @@ export class NekretninaService {
     return this.http.post(`${this.uri}/nekretnina/ukloniIzPromovisanih`, podaci);
   }
 
-  dodajNekretninu(naziv, adresa, opstina, grad, tipNekretnine, brojSpratova, sprat, povrsina, brojSoba, namestena, tipOglasa, cena, vlasnik, galerija) {
-    let odobrena = localStorage.getItem('ulogovan') != null ? true : false;
+  dodajNekretninu(naziv, adresa, opstina, grad, tipNekretnine, brojSpratova, sprat, povrsina, brojSoba, namestena, tipOglasa, cena, vlasnik, galerija, odobrena) {
     const podaci = {
       naziv: naziv,
       adresa: adresa,

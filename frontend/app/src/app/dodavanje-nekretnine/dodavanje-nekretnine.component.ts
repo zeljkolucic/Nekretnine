@@ -54,8 +54,9 @@ export class DodavanjeNekretnineComponent implements OnInit {
         (res) => console.log(res),
         (err) => console.log(err)
       );
+      let odobrena = this.korisnik.tip == 'registrovani korisnik' ? false : true;
       this.nekretninaService.dodajNekretninu(this.naziv, this.adresa, this.opstina, this.grad, this.tipNekretnine, this.brojSpratova,
-          this.sprat, this.povrsina, this.brojSoba, this.namestena, this.tipOglasa, this.cena, this.vlasnik, this.galerija).subscribe();
+          this.sprat, this.povrsina, this.brojSoba, this.namestena, this.tipOglasa, this.cena, this.vlasnik, this.galerija, odobrena).subscribe();
       this.prikaziSnackBar('Nekretnina uspesno dodata.');
     }
   }

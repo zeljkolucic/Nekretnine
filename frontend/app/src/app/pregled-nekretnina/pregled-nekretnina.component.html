@@ -13,7 +13,7 @@
     <ngb-carousel>
         <ng-template ngbSlide *ngFor="let nekretnina of promovisaneNekretnine">
             <div class="picsum-img-wrapper">
-                <a routerLink='nekretnina/{{nekretnina.idN}}' routerLinkActive="tipKorisnika() == 'registrovani korisnik' && !prikazGalerijeZaRegistrovanogKorisnika()">
+                <a routerLink='nekretnina/{{nekretnina.idN}}' routerLinkActive="ulogovanKorisnik()">
                     <img src={{nekretnina.galerija[0]}} width='100%' alt="Random first slide">
                 </a>
             </div>

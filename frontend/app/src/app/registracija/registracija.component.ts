@@ -48,7 +48,7 @@ export class RegistracijaComponent implements OnInit {
             if(!this.slika) 
               this.slika = 'podrazumevano.png'; 
             this.slika = '../assets/' + this.slika;
-            this.prikaziSnackBar('Zahtev za registracijom uspesno poslat!');
+            
             const formData = new FormData();
             formData.append('file', this.fajlSlika);
 
@@ -56,6 +56,7 @@ export class RegistracijaComponent implements OnInit {
               (res) => this.slika = res,
               (err) => console.log(err)
             );
+            this.prikaziSnackBar('Zahtev za registracijom uspesno poslat!');
             this.zahtevService.dodajZahtev(this.ime, this.prezime, this.korisnickoIme, this.lozinka, this.slika, this.adresa, this.gradDrzava).subscribe((err) => {
               if(err) console.log(err);
             })
